@@ -1,0 +1,137 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Payments History</h3>
+        </div>
+    </div>
+
+    <div class="col-lg-12 ml-5" style="width: 100%">
+        <div class="row mt-2">
+            <div class="col-lg-12">
+                <h4 class="card-label">Filter</h4>
+            </div>
+            
+            <div class="col-lg-3">
+                <label class="col-form-label">Name </label>
+                <input class="form-control form-control-lg form-control-solid" name="name" #nameSearch type="text" (keyup)="search('name',nameSearch.value)" />
+            </div>
+            <div class="col-lg-3">
+                <label class="col-form-label">Payment Method </label>
+                <select class="form-control form-control-lg form-control-solid" name="payment_method" #payment_methodSearch
+                type="text" (change)="search('payment_method',payment_methodSearch.value)">
+                <option value=""></option>
+                <option value="PAY_HERE">PAY HERE</option>
+                <option value="SLT_BILL">SLT BILL</option>
+                <option value="BANK">BANK</option>
+                <option value="SLT_BRANCH">SLT BRANCH</option>
+            </select>
+        </div>
+            <div class="col-lg-3">
+                <label class="col-form-label">Status </label>
+                <select class="form-control form-control-lg form-control-solid" name="status" #statusSearch type="text"
+                    (change)="search('status',statusSearch.value)">
+                    <option></option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="APPROVED">APPROVED</option>
+                    <option value="REJECTED">REJECTED</option>
+                </select>
+            </div>
+            <div class="col-lg-1 ml-1">
+                <label class="col-form-label"></label>
+                <a type="button" class="btn  form-control form-control-lg form-control-solid button-bottom"
+                    (click)="statusSearch.value = '';payment_methodSearch.value = '';clearFilter()">Clear</a>
+            </div>
+        </div>
+    </div>
+<div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+        <mat-table #table2 [dataSource]="dataSource">
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.id }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef>Phone </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.phone }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="payment_date">
+                <mat-header-cell *matHeaderCellDef>Date Sub. </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.payment_date }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="payment_method">
+                <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.payment_method }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="live_teacher">
+                <mat-header-cell *matHeaderCellDef>Teacher </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.live_class.teacher.name }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="live_class_id">
+                <mat-header-cell *matHeaderCellDef>Class ID </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.live_class.id }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="live_class_type">
+                <mat-header-cell *matHeaderCellDef>Class Type </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.live_class.type }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-chip-list aria-label="">
+                        <mat-chip color="" *ngIf="row.status == 'PENDING'" selected>PENDING</mat-chip>
+                        <mat-chip color="accent" *ngIf="row.status == 'APPROVED'" selected>APPROVED</mat-chip>
+                        <mat-chip color="warn" *ngIf="row.status == 'REJECTED'" selected>REJECTED</mat-chip>
+                    </mat-chip-list>
+                </mat-cell>
+
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+                <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.created_at }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="primary" type="button" [routerLink]="['/live-payments/edit', row.id]"
+                        matTooltip="Edit">
+                        <mat-icon>create</mat-icon>
+                    </button>&nbsp;
+                    <button mat-icon-button color="warn" type="button" (click)="delete(row.id,row.name)"
+                        matTooltip="Delete">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="pagination_data.total" [pageSizeOptions]="pagination_item_counts"
+            (page)="pageEvent($event)" showFirstLastButtons></mat-paginator>
+    </div>
+
+</div>
+</div>

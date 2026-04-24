@@ -1,0 +1,193 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">VOD Enrollments</h3>
+    </div>
+  </div>
+  <div class="col-lg-12 ml-5" style="width: 100%">
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <h4 class="card-label">Filter</h4>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-2">
+          <label class="col-form-label">Student Name, Phone </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="keyword"
+            #keyword
+            type="text"
+            (keyup)="search('keyword', keyword.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Course Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="course_id"
+            #course_id
+            type="text"
+            (keyup)="search('course_id', course_id.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Student Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="student_id"
+            #student_id
+            type="text"
+            (keyup)="search('student_id', student_id.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Enrollment Status </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="status"
+            #status
+            type="text"
+            (change)="search('status', status.value)"
+          >
+            <option></option>
+            <option value="active">Active</option>
+            <option value="blocked">Blocked</option>
+          </select>
+          <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="status"  #statusSearch type="text" (keyup)="search('status',statusSearch.value)"/> -->
+        </div>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-2">
+          <label class="col-form-label">Start Date </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="date_begin"
+            #date_begin
+            type="date"
+            (change)="search('date_begin', date_begin.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">End Date </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="date_end"
+            #date_end
+            type="date"
+            (change)="search('date_end', date_end.value)"
+          />
+        </div>
+        <div class="col-lg-1">
+          <label class="col-form-label"></label>
+          <a
+            type="button"
+            class="btn form-control form-control-lg form-control-solid button-bottom"
+            (click)="
+              status.value = '';
+              course_id.value = '';
+              student_id.value = '';
+              date_begin.value = '';
+              date_end.value = '';
+              clearFilter()
+            "
+            >Clear</a
+          >
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+      <mat-table #table2 [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>Enroll Id </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.enrollment.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="course_id">
+          <mat-header-cell *matHeaderCellDef>Course Id </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.course.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name_en">
+          <mat-header-cell *matHeaderCellDef>Course </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{
+              row.course.name_en.length > 20
+                ? (row.course.name_en | slice: 0:20) + ".."
+                : row.course.name_en
+            }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="student_id">
+          <mat-header-cell *matHeaderCellDef>Student Id</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.student.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="student">
+          <mat-header-cell *matHeaderCellDef>Student</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.student.fname }} {{ row.student.lname }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="last_payment_date">
+          <mat-header-cell *matHeaderCellDef>Last Pay</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.enrollment.payment_date }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-chip-list aria-label="">
+              <mat-chip
+                color=""
+                *ngIf="row.enrollment.enrol_status == 'active'"
+                selected
+                >Active</mat-chip
+              >
+              <mat-chip
+                color="warn"
+                *ngIf="row.enrollment.enrol_status == 'blocked'"
+                selected
+                >Blocked</mat-chip
+              >
+            </mat-chip-list>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+          <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.enrollment.created_at }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              [routerLink]="['/enrollments/edit', row.enrollment.id]"
+              matTooltip="Edit"
+            >
+              <mat-icon>create</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator
+        [length]="pagination_data.total"
+        [pageSizeOptions]="pagination_item_counts"
+        (page)="pageEvent($event)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

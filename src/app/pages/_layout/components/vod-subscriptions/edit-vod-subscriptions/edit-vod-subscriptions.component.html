@@ -1,0 +1,500 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Payment Details
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Student Details
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(3)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(3)"
+          role="tab"
+        >
+          Teacher Details
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="paymentMethod != 'SLT_BILL' && (paymentStatus == 'APPROVED' || paymentStatus == 'CANCELED'  || paymentStatus == 'REJECTED')"
+      >
+        <a
+          (click)="setActiveTab(4)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(4)"
+          role="tab"
+        >
+          Subscription Details
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="paymentMethod == 'SLT_BILL' && ( paymentStatus == 'APPROVED' || paymentStatus == 'CANCELED'  || paymentStatus == 'REJECTED')"
+      >
+        <a
+          (click)="setActiveTab(5)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(5)"
+          role="tab"
+        >
+        Subscription Details
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div class="row" *ngIf="vodSubscriptionResponse">
+          <div class="col-lg-12 card mb-4">
+            <div class="col-lg-12 mt-4 row mb-4">
+              <h5 class="col-lg-12">
+                Payment Details - {{ vodSubscriptionResponse.status }}
+              </h5>
+              <div class="col-lg-6 mt-4 row">
+                <h6 class="col-lg-12 mt-4">Student Info</h6>
+                <div class="col-lg-6 mt-4">
+                  ID<br />
+                  Name<br />
+                  Phone<br />
+                  Email<br />
+                  NIC<br /><br /><br /><br />
+                </div>
+                <div class="col-lg-6 mt-4">
+                  {{ vodSubscriptionResponse.student.id }}<br />
+                  {{ vodSubscriptionResponse.name }}<br />
+                  {{ vodSubscriptionResponse.phone }}<br />
+                  {{ vodSubscriptionResponse.student.email }}<br />
+                  {{ vodSubscriptionResponse.student.nic }}<br />
+                </div>
+              </div>
+              <div class="col-lg-6 mt-4 row">
+                <h6 class="col-lg-12 mt-4">Payment Info</h6>
+                <div class="col-lg-6 mt-4">
+                  <b>Payment Method</b><br />
+                  Amount<br />
+                  Promo Code<br />
+                  Date<br />
+                  Bank<br />
+                  Branch<br />
+                  Created<br />
+                  Updated<br />
+                </div>
+                <div class="col-lg-6 mt-4">
+                  <b>{{ vodSubscriptionResponse.payment_method }}</b
+                  ><br />
+                  {{ vodSubscriptionResponse.amount }}<br />
+                  {{ vodSubscriptionResponse.promocode_used }}<br />
+                  {{ vodSubscriptionResponse.payment_date }}<br />
+                  {{ vodSubscriptionResponse.bank }}<br />
+                  {{ vodSubscriptionResponse.branch }}<br />
+                  {{ vodSubscriptionResponse.created_at }}<br />
+                  {{ vodSubscriptionResponse.updated_at }}<br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <div class="row" *ngIf="vodSubscriptionResponse">
+          <div class="col-lg-12 mb-4">
+            <div class="col-lg-12 row mb-4">
+              <div class="col-lg-6 row">
+                <div class="col-lg-6">
+                  ID<br />
+                  Name<br />
+                  Phone<br />
+                  Email<br />
+                  NIC<br />
+                </div>
+                <div class="col-lg-6">
+                  {{ vodSubscriptionResponse.student.id }}<br />
+                  {{ vodSubscriptionResponse.student.name }}<br />
+                  {{ vodSubscriptionResponse.student.phone }}<br />
+                  {{ vodSubscriptionResponse.student.email }}<br />
+                  {{ vodSubscriptionResponse.student.nic }}<br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+        <div class="row" *ngIf="vodSubscriptionResponse">
+          <div class="col-lg-12 mb-4">
+            <div class="col-lg-12 row mb-4">
+              <div class="col-lg-6 row">
+                <div class="col-lg-6">
+                  ID<br />
+                  Name<br />
+                  Phone<br />
+                  Email<br />
+                  NIC<br />
+                </div>
+                <div class="col-lg-6">
+                  {{ vodSubscriptionResponse.teacher.id }}<br />
+                  {{ vodSubscriptionResponse.teacher.name }}<br />
+                  {{ vodSubscriptionResponse.teacher.phone }}<br />
+                  {{ vodSubscriptionResponse.teacher.email }}<br />
+                  {{ vodSubscriptionResponse.teacher.nic }}<br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+        <div class="row" *ngIf="paymentMethod != 'SLT_BILL'">
+          <div class="col-lg-12 card mb-4">
+            <!-- <div class="col-lg-12 mt-4 row mb-4">
+              <h5 class="col-lg-12">
+                Payment Details - {{ vodSubscriptionResponse.status }}
+              </h5>
+              </div> -->
+
+            <div class="row mt-2">
+              <div class="col-lg-12">
+                <h4 class="card-label">Filter</h4>
+              </div>
+              <div class="col-lg-12 row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-3">
+                  <label class="col-form-label">Payment ID </label>
+                  <input
+                    class="form-control form-control-lg form-control-solid"
+                    name="payment_id"
+                    #paymentIdSearch
+                    type="text"
+                    (keyup)="search('payment_id', paymentIdSearch.value)"
+                  />
+                </div>
+                <div class="col-lg-3">
+                  <label class="col-form-label">Payment Method </label>
+                  <select
+                    class="form-control form-control-lg form-control-solid"
+                    name="method"
+                    #payment_methodSearch
+                    type="text"
+                    (change)="search('method', payment_methodSearch.value)"
+                  >
+                    <option value=""></option>
+                    <option value="VISA">VISA</option>
+                    <option value="MASTER">MASTER</option>
+                  </select>
+                </div>
+                <div class="col-lg-1 ml-1">
+                  <label class="col-form-label"></label>
+                  <a
+                    type="button"
+                    class="
+                      btn
+                      form-control form-control-lg form-control-solid
+                      button-bottom
+                    "
+                    (click)="
+                      paymentIdSearch.value = '';
+                      payment_methodSearch.value = '';
+                      clearFilter()
+                    "
+                    >Clear</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="table-responsive angular-bootstrap-table">
+                <mat-table #table2 [dataSource]="dataSource">
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.id }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="payhere_amount">
+                    <mat-header-cell *matHeaderCellDef
+                      >Payment Amount</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let row">
+                      {{ row.payhere_amount }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="payment_id">
+                    <mat-header-cell *matHeaderCellDef
+                      >Payment ID</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let row">
+                      {{ row.payment_id }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="method">
+                    <mat-header-cell *matHeaderCellDef>Method</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.method }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="item_rec_status">
+                    <mat-header-cell *matHeaderCellDef
+                      >Item Status</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let row">
+                      {{ row.item_rec_status }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="item_rec_install_paid">
+                    <mat-header-cell *matHeaderCellDef
+                      >Item Install</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let row">
+                      {{ row.item_rec_install_paid }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef
+                      >Created
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.created_at | date: "short" }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="vod_subcription_id">
+                    <mat-header-cell *matHeaderCellDef
+                      >Subscription ID</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let row">
+                      {{ row.vod_subscription.id }}
+                    </mat-cell>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="action">
+                              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                  <button
+                                      mat-icon-button
+                                      color="primary"
+                                      type="button"
+                                      [routerLink]="['/vod-subscriptions/edit', row.id]"
+                                      matTooltip="Edit"
+                                  >
+                                      <mat-icon>create</mat-icon></button
+                                  > -->
+                  <!-- &nbsp;
+                                  <button
+                                      mat-icon-button
+                                      color="warn"
+                                      type="button"
+                                      (click)="delete(row.id,row.name)"
+                                      matTooltip="Delete"
+                                  > 
+                                      <mat-icon>delete</mat-icon>
+                                  </button>-->
+                  <!-- </mat-cell>
+                             
+                          </ng-container> -->
+                  <mat-header-row
+                    *matHeaderRowDef="displayedColumns"
+                  ></mat-header-row>
+                  <mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></mat-row>
+                </mat-table>
+                <mat-paginator
+                  [length]="pagination_data.total"
+                  [pageSizeOptions]="pagination_item_counts"
+                  (page)="pageEvent($event)"
+                  showFirstLastButtons
+                ></mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--end::Header-->
+        <!--begin::Form-->
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+        <div class="row" *ngIf="paymentMethod == 'SLT_BILL'">
+          <div class="col-lg-12 card mb-4">
+            <div class="row mt-2">
+              <div class="col-lg-12">
+                <h4 class="card-label">Filter</h4>
+              </div>
+              <div class="col-lg-12 row">
+                <div class="col-lg-4"></div>
+
+                <div class="col-lg-3">
+                  <label class="col-form-label">Transaction ID </label>
+                  <input
+                    class="form-control form-control-lg form-control-solid"
+                    name="id"
+                    #transIdSearch
+                    type="text"
+                    (keyup)="search('transaction_id', transIdSearch.value)"
+                  />
+                </div>
+                <div class="col-lg-3">
+                  <label class="col-form-label">Smart ID </label>
+                  <input
+                    class="form-control form-control-lg form-control-solid"
+                    name="smart_id"
+                    #smartIdSearch
+                    type="text"
+                    (keyup)="search('smart_id', smartIdSearch.value)"
+                  />
+                </div>
+                <div class="col-lg-1 ml-1">
+                  <label class="col-form-label"></label>
+                  <a
+                    type="button"
+                    class="
+                      btn
+                      form-control form-control-lg form-control-solid
+                      button-bottom
+                    "
+                    (click)="
+                      smartIdSearch.value = '';
+                      transIdSearch.value = '';
+                      clearFilter()
+                    "
+                    >Clear</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-12 mt-4 row mb-4">
+          <h5 class="col-lg-12">
+            Payment Details - {{ vodSubscriptionResponse.status }}
+          </h5>
+          </div> -->
+            <div>
+              <div class="table-responsive angular-bootstrap-table">
+                <mat-table #table3 [dataSource]="dataSource">
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.id }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="smart_id">
+                    <mat-header-cell *matHeaderCellDef
+                      >Smart ID
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.smart_id }}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="transaction_amount">
+                    <mat-header-cell *matHeaderCellDef
+                      >Transaction Amount
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.transaction_amount }}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="transaction_date">
+                    <mat-header-cell *matHeaderCellDef
+                      >Transaction Date
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.transaction_date | date: "short" }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="success">
+                    <mat-header-cell *matHeaderCellDef>Success</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.success }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="transaction_id">
+                    <mat-header-cell *matHeaderCellDef
+                      >Transaction ID</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let row">
+                      {{ row.transaction_id }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef
+                      >Created
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.created_at | date: "short" }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="vod_subcription_id">
+                    <mat-header-cell *matHeaderCellDef
+                      >subscription ID
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      {{ row.subscription.id }}
+                    </mat-cell>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="action">
+                          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                              <button
+                                  mat-icon-button
+                                  color="primary"
+                                  type="button"
+                                  [routerLink]="['/vod-subscriptions/edit', row.id]"
+                                  matTooltip="Edit"
+                              >
+                                  <mat-icon>create</mat-icon></button
+                              > -->
+                  <!-- &nbsp;
+                              <button
+                                  mat-icon-button
+                                  color="warn"
+                                  type="button"
+                                  (click)="delete(row.id,row.name)"
+                                  matTooltip="Delete"
+                              > 
+                                  <mat-icon>delete</mat-icon>
+                              </button>-->
+                  <!-- </mat-cell>
+                         
+                      </ng-container> -->
+                  <mat-header-row
+                    *matHeaderRowDef="displayedColumnsForSLT"
+                  ></mat-header-row>
+                  <mat-row
+                    *matRowDef="let row; columns: displayedColumnsForSLT"
+                  ></mat-row>
+                </mat-table>
+                <mat-paginator
+                  [length]="pagination_data.total"
+                  [pageSizeOptions]="pagination_item_counts"
+                  (page)="pageEvent($event)"
+                  showFirstLastButtons
+                ></mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end::Card-->
+    </div>
+  </div>
+</div>

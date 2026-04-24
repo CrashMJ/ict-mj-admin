@@ -1,0 +1,165 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Video List</h3>
+        </div>
+        <div class="card-toolbar">
+            <a type="button" class="btn btn-primary" (click)="addNewVideo()">New Video</a>
+        </div>
+    </div>
+    <div class="col-lg-12 ml-5"style="width: 100%">
+        <div class="row mt-2">
+            <div class="col-lg-12">
+                <h4 class="card-label">Filter</h4>
+            </div>
+            <div class="col-lg-12 row">
+                    <div class="col-lg-3">
+                            <label class="col-form-label">Code </label>
+                            <input class="form-control form-control-lg form-control-solid" name="code" #codeSearch type="text" (keyup)="search('video_code',codeSearch.value)" />
+                        </div>
+                <div class="col-lg-3">
+                    <label class="col-form-label">Title </label>
+                    <input class="form-control form-control-lg form-control-solid" name="title" #titleSearch type="text" (keyup)="search('title',titleSearch.value)" />
+                </div>
+                <div class="col-lg-3">
+                        <label class="col-form-label">Medium </label>
+                        <select class="form-control form-control-lg form-control-solid" name="medium" #mediumSearch
+                            type="text" (change)="search('medium',mediumSearch.value)">
+                            <option value=""></option>
+                            <option value="SINHALA">Sinhala</option>
+                            <option value="ENGLISH">English</option>
+                            <option value="TAMIL">Tamil</option>
+                        </select>
+                    </div>
+                <div class="col-lg-3">
+                    <label class="col-form-label">Grade </label>
+                    <select class="form-control form-control-lg form-control-solid" name="grade" #gradeSearch
+                    type="text" (change)="search('grade',gradeSearch.value)">
+                    <option value=""></option>
+                    <option value="GRADE12">Grade 12</option>
+                    <option value="GRADE13">Grade 13</option>
+                    <option value="PRACTICAL">Practical</option>
+                    <option value="REVISION">Revision</option>
+                </select>
+                    <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="grade" #gradeSearch type="text" (keyup)="search('grade',gradeSearch.value)"/> -->
+                </div>
+                <div class="col-lg-3">
+                    <label class="col-form-label">Status </label>
+                    <select class="form-control form-control-lg form-control-solid" name="status" #statusSearch
+                    type="text" (change)="search('status',statusSearch.value)">
+                    <option value=""></option>
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="DISABLED">DISABLED</option>
+                </select>
+                    <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="status" #statusSearch type="text" (keyup)="search('status',statusSearch.value)"/> -->
+                </div>
+                <!-- <div class="col-lg-1">
+                    <label class="col-form-label"></label>
+                    <a type="button" class="btn form-control form-control-lg btn-primary button-bottom" (click)="addNewAdmin()">Filter</a>
+                 </div> -->
+                 <div class="col-lg-1 ml-1">
+                    <label class="col-form-label"></label>
+                    <a type="button" class="btn  form-control form-control-lg form-control-solid button-bottom" (click)="codeSearch.value='';mediumSearch.value='';titleSearch.value = '';statusSearch.value = '';gradeSearch.value = '';clearFilter()">Clear</a>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <div class="mat-elevation-z8">
+                <mat-table #table2 [dataSource]="dataSource">
+				
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.id }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="video_code">
+                        <mat-header-cell *matHeaderCellDef>Code </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.video_code }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef>Title </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.title | slice:0:20 }}...
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="teacher">
+                        <mat-header-cell *matHeaderCellDef>Teacher </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.teacher.name }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef>Price </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.price }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="grade">
+                        <mat-header-cell *matHeaderCellDef>Grade </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.grade }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="subject">
+                            <mat-header-cell *matHeaderCellDef>Subject </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.subject.title }}
+                            </mat-cell>
+                        </ng-container>
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-chip-list aria-label="">
+                                <mat-chip color="accent" *ngIf="row.status == 'ACTIVE'" selected>Active</mat-chip>
+                                <mat-chip color="warn" *ngIf="row.status == 'DISABLED'" selected>Disabled</mat-chip>
+                            </mat-chip-list>
+                        </mat-cell>
+                       
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <button
+                                mat-icon-button
+                                color="primary"
+                                type="button"
+                                [routerLink]="['/video/edit/' , row.id]"
+                                matTooltip="Edit"
+                            >
+                                <mat-icon>create</mat-icon></button
+                            >&nbsp;
+                            <button
+                                mat-icon-button
+                                color="warn"
+                                type="button"
+                                (click)="delete(row.id,row.id)"
+                                matTooltip="Delete"
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                       
+                    </ng-container>
+                    <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></mat-row>
+                </mat-table>
+                <mat-paginator
+				[length]="pagination_data.total"
+				[pageSizeOptions]="pagination_item_counts"
+				(page)="pageEvent($event)"
+				showFirstLastButtons
+			></mat-paginator>
+              </div>
+
+        </div>
+    </div>
+</div>

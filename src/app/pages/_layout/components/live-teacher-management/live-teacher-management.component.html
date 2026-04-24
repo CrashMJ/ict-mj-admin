@@ -1,0 +1,175 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Live Teachers List</h3>
+        </div>
+    </div>
+    
+    <div class="col-lg-12 ml-5"style="width: 100%">
+            <div class="row mt-2">
+                <div class="col-lg-12">
+                    <h4 class="card-label">Filter</h4>
+                </div>
+                <div class="col-lg-12 row">
+                        <!-- <div class="col-lg-3">
+                                <label class="col-form-label">ID </label>
+                                <input class="form-control form-control-lg form-control-solid" name="id" #idSearch type="text" (keyup)="search('id',idSearch.value)" />
+                            </div> -->
+                    <div class="col-lg-3">
+                        <label class="col-form-label">Name </label>
+                        <input class="form-control form-control-lg form-control-solid" name="name" #nameSearch type="text" (keyup)="search('name',nameSearch.value)" />
+                    </div>
+                    <!-- <div class="col-lg-3">
+                            <label class="col-form-label">Medium </label>
+                            <select class="form-control form-control-lg form-control-solid" name="medium" #mediumSearch
+                                type="text" (change)="search('medium',mediumSearch.value)">
+                                <option></option>
+                                <option value="SINHALA">Sinhala</option>
+                                <option value="ENGLISH">English</option>
+                                <option value="TAMIL">Tamil</option>
+                            </select>
+                        </div> -->
+                        <div class="col-lg-3">
+                                <label class="col-form-label">Subject </label>
+                                <select class="form-control form-control-lg form-control-solid" name="subject" #subjectSearch
+                                    type="text" (change)="search('subject',subjectSearch.value)">
+                                    <option></option>
+                                    <option disabled>Subjects</option>
+                                            <option value="{{subject.id}}" *ngFor="let subject of subjectObj">{{subject.title}}</option>
+                                </select>
+                            </div>
+                        <div class="col-lg-3">
+                                <label class="col-form-label">Phone </label>
+                        <input class="form-control form-control-lg form-control-solid" name="phone" #phoneSearch type="text" (keyup)="search('phone',phoneSearch.value)" />
+                            </div>
+                            <div class="col-lg-3">
+                                    <label class="col-form-label">email </label>
+                        <input class="form-control form-control-lg form-control-solid" name="email" #emailSearch type="text" (keyup)="search('email',emailSearch.value)" />
+                                </div>
+                                <div class="col-lg-3">
+                                        <label class="col-form-label">Status </label>
+                                        <select class="form-control form-control-lg form-control-solid" name="status" #statusSearch
+                                            type="text" (change)="search('status',statusSearch.value)">
+                                            <option></option>
+                                            <option value="PENDING">PENDING</option>
+                                            <option value="ACTIVE">ACTIVE</option>
+                                            <option value="BLOCKED">BLOCKED</option>
+                                        </select>
+                                    </div>
+                     <div class="col-lg-1 ml-1">
+                        <label class="col-form-label"></label>
+                        <a type="button" class="btn  form-control form-control-lg form-control-solid button-bottom" (click)="nameSearch.value = '';subjectSearch.value = '';phoneSearch.value = '';emailSearch.value='';statusSearch.value = '';clearFilter()">Clear</a>
+                     </div>
+                </div>
+            </div>
+        </div>
+        
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <div class="mat-elevation-z8">
+                <mat-table #table2 [dataSource]="dataSource">
+				
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.id }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.name }}
+                        </mat-cell>
+                    </ng-container>
+                   
+                    <ng-container matColumnDef="phone">
+                        <mat-header-cell *matHeaderCellDef>Phone </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.phone }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="subject">
+                        <mat-header-cell *matHeaderCellDef>Subject </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.subject.title }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="medium">
+                        <mat-header-cell *matHeaderCellDef>Medium </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.medium }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-chip-list aria-label="">
+                                <mat-chip color="primary" *ngIf="row.status == 'PENDING'" selected>Pending</mat-chip>
+                                <mat-chip color="accent" *ngIf="row.status == 'ACTIVE'" selected>Active</mat-chip>
+                                <mat-chip color="warn" *ngIf="row.status == 'BLOCKED'" selected>Blocked</mat-chip>
+                            </mat-chip-list>
+                        </mat-cell>
+                       
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <button
+                                mat-icon-button
+                                color="primary"
+                                type="button"
+                                matTooltip="Edit"
+                                [routerLink]="['/live-teacher/edit', row.id]"
+                            >
+                                <mat-icon>create</mat-icon></button
+                            >&nbsp;
+                            <button
+                                mat-icon-button
+                                color="warn"
+                                type="button"
+                                (click)="delete(row.id,row.name)"
+                                matTooltip="Delete"
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                       
+                    </ng-container>
+                    <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></mat-row>
+                </mat-table>
+                <mat-paginator
+				[length]="pagination_data.total"
+				[pageSizeOptions]="pagination_item_counts"
+				(page)="pageEvent($event)"
+				showFirstLastButtons
+			    ></mat-paginator>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- <td>
+    <a title="Edit video" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+    [routerLink]="['/video/edit/' , el.id]" >
+   <span [inlineSVG]="'../../../../../assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+     class="svg-icon svg-icon-md svg-icon-primary">
+   </span>
+ </a>
+</td>
+<td>
+       <a title="Delete video" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+       (click)="delete(el.id)"
+       >
+       <span [inlineSVG]="'../../../../../assets/media/svg/icons/General/Trash.svg'" cacheSVG="true" 
+         class="svg-icon svg-icon-md svg-icon-danger">
+       </span>
+     </a>
+   
+   
+</td> -->

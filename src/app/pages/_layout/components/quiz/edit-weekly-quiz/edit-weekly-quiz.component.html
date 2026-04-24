@@ -1,0 +1,332 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)"
+                    role="tab">
+                    Quiz
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)"
+                    role="tab">
+                    Images
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(3)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(3)"
+                    role="tab">
+                    Answers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(4)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(4)"
+                    role="tab">
+                    Correct Answers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(5)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(5)"
+                    role="tab">
+                    Winner
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-12 col-form-label">Question</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="question" [class.is-invalid]="isControlInvalid('question')"
+                                [class.is-valid]="isControlValid('question')" />
+                        </div>
+                       
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2  col-form-label">Answer 1(Correct Answer)</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" disabled type="text"
+                                formControlName="answer1" [class.is-invalid]="isControlInvalid('answer1')"
+                                [class.is-valid]="isControlValid('answer1')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Answer 2</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" disabled type="text"
+                                formControlName="answer2" [class.is-invalid]="isControlInvalid('answer2')"
+                                [class.is-valid]="isControlValid('answer2')" />
+                        </div>
+                       
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Answer 3</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" disabled type="text"
+                                formControlName="answer3" [class.is-invalid]="isControlInvalid('answer3')"
+                                [class.is-valid]="isControlValid('answer3')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Answer 4 </label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" disabled type="text"
+                                formControlName="answer4" [class.is-invalid]="isControlInvalid('answer4')"
+                                [class.is-valid]="isControlValid('answer4')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Redirect Url</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="redirectUrl" [class.is-invalid]="isControlInvalid('redirectUrl')"
+                                [class.is-valid]="isControlValid('redirectUrl')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Status</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="status" formControlName="status" [class.is-invalid]="isControlInvalid('status')"
+                                [class.is-valid]="isControlValid('status')">
+                                <option value="ACTIVE">Active</option>
+                                <option value="DISABLED">Disabled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+                           >Save</button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                <div class="col-lg-12 text-center card mb-4">
+                    <div [formGroup]="formGroup2" class="col-lg-12 text-center mt-4" *ngIf="weeklyQuizResponse">
+                        <h5 class="col-xl-12 col-lg-12 col-form-label">Sponsor Banner</h5>
+                        <img src="{{STORAGE_BUCKET}}{{weeklyQuizResponse.sponsor_banner}}" class="teacher-img" alt="">
+                        <div class="col-lg-12 row">
+                            <div class="col-lg-3"></div>
+                            <div class="form-group col-lg-6 row">
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('sponsor_banner',$event)"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateSponsorBanner()" [disabled]="formGroup2.invalid">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 text-center card mb-4">
+                    <div [formGroup]="formGroup3" class="col-lg-12 text-center mt-4 " *ngIf="weeklyQuizResponse">
+                        <h5 class="col-xl-12 col-lg-12 col-form-label">Sponsor Logo</h5>
+                        <img src="{{STORAGE_BUCKET}}{{weeklyQuizResponse.sponsor_logo}}" class="teacher-img" alt="">
+                        <div class="col-lg-12 row">
+                            <div class="col-lg-3"></div>
+                            <div class="form-group col-lg-6 row">
+                               
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('sponsor_logo',$event)" accept=".png, .jpg, .jpeg"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateSponsorLogo()" [disabled]="formGroup3.invalid">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+                <div class="mat-elevation-z8">
+                    <mat-table #table2 [dataSource]="dataSource2">
+				
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="video_id">
+                            <mat-header-cell *matHeaderCellDef>Answer </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.answer }}
+                            </mat-cell>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="student_id">
+                            <mat-header-cell *matHeaderCellDef>Student ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.name }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.email }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.phone }}
+                            </mat-cell>
+                        </ng-container>
+                     
+                        <ng-container matColumnDef="created_at">
+                            <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.created_at }}
+                            </mat-cell>
+                        </ng-container>
+                        <mat-header-row
+                            *matHeaderRowDef="displayedColumns2"
+                        ></mat-header-row>
+                        <mat-row
+                            *matRowDef="let row; columns: displayedColumns2"
+                        ></mat-row>
+                    </mat-table>
+                    <mat-paginator
+                        [length]="pagination_data2.total"
+                        [pageSizeOptions]="pagination_item_counts2"
+                        (page)="pageEvent2($event)"
+                        showFirstLastButtons
+                    ></mat-paginator>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+                <div class="mat-elevation-z8">
+                    <mat-table #table2 [dataSource]="dataSource3">
+				
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="video_id">
+                            <mat-header-cell *matHeaderCellDef>Answer </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.answer }}
+                            </mat-cell>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="student_id">
+                            <mat-header-cell *matHeaderCellDef>Student ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.name }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.email }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.phone }}
+                            </mat-cell>
+                        </ng-container>
+                     
+                        <ng-container matColumnDef="created_at">
+                            <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.created_at }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <button
+                                    mat-icon-button
+                                    color="primary"
+                                    type="button"
+                                    [routerLink]=""
+                                    [disabled]="weeklyQuizResponse && weeklyQuizResponse.winner && weeklyQuizResponse.winner.id"
+                                    matTooltip="Select"
+                                    (click)="selectWinner(row.id)"
+                                >
+                                    <mat-icon>done_outline</mat-icon></button
+                                >&nbsp;
+                            </mat-cell>
+                           
+                        </ng-container>
+                        <mat-header-row
+                            *matHeaderRowDef="displayedColumns3"
+                        ></mat-header-row>
+                        <mat-row
+                            *matRowDef="let row; columns: displayedColumns3"
+                        ></mat-row>
+                    </mat-table>
+                    <mat-paginator
+                    [length]="pagination_data3.total"
+                    [pageSizeOptions]="pagination_item_counts3"
+                    (page)="pageEvent3($event)"
+                    showFirstLastButtons
+                ></mat-paginator>
+                  </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+                <div class="col-lg-12 text-center card mb-4  pt-5" *ngIf="!weeklyQuizResponse || !weeklyQuizResponse.winner || !weeklyQuizResponse.winner.id">
+                    <h3>Winner is not available!</h3>
+                </div>
+                <div class="col-lg-12 card mb-4  pt-5">
+                    <div class="row" *ngIf="weeklyQuizResponse && weeklyQuizResponse.winner && weeklyQuizResponse.winner.id">
+                        <div class="col-lg-12 mb-4">
+                          <div class="col-lg-12 row mb-4">
+                            <div class="col-lg-6 row">
+                              <div class="col-lg-6">
+                                ID<br/>
+                                Name<br/>
+                                Phone<br/>
+                                Email<br/>
+                                NIC<br/>
+                            </div>
+                            <div class="col-lg-6">
+                                {{weeklyQuizResponse.winner.id}}<br/>
+                                {{weeklyQuizResponse.winner.name}}<br/>
+                                {{weeklyQuizResponse.winner.phone}}<br/>
+                                {{weeklyQuizResponse.winner.email}}<br/>
+                                {{weeklyQuizResponse.winner.nic}}<br/>
+                            </div>
+                            </div>
+                            
+                          </div>
+                          <div class="col-lg-12 row mb-4">
+                              <a [routerLink]="['/student/edit', weeklyQuizResponse.winner.id]">
+                                  Winner's Profile
+                              </a>
+                          </div>
+                        </div>
+                       
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

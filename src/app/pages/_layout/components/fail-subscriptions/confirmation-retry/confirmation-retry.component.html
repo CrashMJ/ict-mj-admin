@@ -1,0 +1,17 @@
+<div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title h4" id="example-modal-sizes-title-lg">
+                <h3>Retry subcription</h3>
+            </div>
+        </div>
+        <!-- <div class="modal-title"> -->
+                <h4 class="ml-5 mt-5 mb-5">Do you really want to retry  {{id}} subsription?</h4>
+        <!-- </div> -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light btn-elevate mr-2" (click)="close()">Cancel</button>
+            <ng-container>
+    
+                <button type="submit" class="btn btn-primary btn-elevate" (click)="retry()">Submit</button>
+            </ng-container>
+        </div>
+    </div>

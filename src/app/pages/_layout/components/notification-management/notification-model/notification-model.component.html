@@ -1,0 +1,166 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <h3>ADD NEW NOTIFICATION</h3>
+      <ng-container>
+        <!-- <ng-container >Edit</ng-container>
+                          <ng-container >Create</ng-container>
+                          customer -->
+        <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Title</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="title"
+                [class.is-invalid]="isControlInvalid('title')"
+                [class.is-valid]="isControlValid('title')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Message</label>
+            <div class="col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="msg"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Type</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                #Type
+                (change)="setType(Type.value)"
+              >
+                <option value="Custom">Custom</option>
+                <option value="Class">Class</option>
+                <option value="Inquiry">Inquiry</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="smsType == 'Custom'">
+            <label class="col-xl-3 col-form-label">Number List</label>
+            <div class="col-xl-9">
+              <textarea
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                rows="6"
+                formControlName="numbers"
+              ></textarea>
+            </div>
+            <div class="col-xl-3"></div>
+            <div class="col-xl-9">
+              *** Please separate numbers by commas without spaces (Eg:
+              0712345678,0701234567,0721234567)
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="smsType == 'Class'">
+            <label class="col-xl-3 col-form-label">Class Id</label>
+            <div class="col-xl-5">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                #ClassId
+                type="text"
+                formControlName="msg"
+                (keyup)="setClassId(ClassId.value)"
+              />
+            </div>
+            <div class="col-xl-4">
+              <button
+                class="btn btn-primary btn-elevate"
+                [disabled]="!classId"
+                (click)="getDataEnroll()"
+              >
+                Get Numbers
+              </button>
+            </div>
+            <div class="col-xl-3"></div>
+            <div class="col-xl-9">
+              *** Please enter valid class id and double check if it's correct.
+              SMS can't undo after click on the send button.
+            </div>
+            <div class="col-xl-3"></div>
+            <div class="col-xl-9">
+              <span style="color:chocolate"
+                >Selected Numbers : {{ classNumberList?.length || "N/A" }}</span
+              >
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="smsType == 'Inquiry'">
+            <label class="col-xl-3 col-form-label mb-2">Inquiry Grade</label>
+            <div class="col-xl-5 mb-2">
+              <select
+              class="form-control form-control-lg form-control-solid"
+              #InqGrade
+              (change)="setInqGrade(InqGrade.value)"
+          >
+                  <option value="">Select</option>
+                  <option value="miner">Miner</option>
+                  <option value="ol">O/L</option>
+                  <option value="al">A/L</option>
+              </select>
+            </div>
+            <div class="col-xl-4 mb-2"></div>
+            <label class="col-xl-3 col-form-label">Inquiry Exam Year</label>
+            <div class="col-xl-5">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                #InqYear
+                type="text"
+                (keyup)="setInqYear(InqYear.value)"
+              />
+            </div>
+            <div class="col-xl-4">
+              <button
+                class="btn btn-primary btn-elevate"
+                [disabled]="!inqGrade || !inqYear"
+                (click)="getDataInq()"
+              >
+                Get Numbers
+              </button>
+            </div>
+            <div class="col-xl-3"></div>
+            <div class="col-xl-9">
+              *** Please enter valid class id and double check if it's correct.
+            </div>
+            <div class="col-xl-3"></div>
+            <div class="col-xl-9">
+              <span style="color:chocolate"
+                >Selected Numbers :
+                {{ inquiryNumberList?.length || "N/A" }}</span
+              >
+            </div>
+          </div>
+          <div class="form-group row">
+            <span style="color:crimson">*** Please re-check numbers and the sms message carefully before click on the send button.</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container>
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Send
+      </button>
+    </ng-container>
+  </div>
+</div>

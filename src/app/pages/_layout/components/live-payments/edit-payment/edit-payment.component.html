@@ -1,0 +1,196 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Payment Details
+        </a>
+      </li>
+      <!-- <li
+        class="nav-item"
+        *ngIf="
+          paymentResponse &&
+          (paymentResponse.payment_method == 'BANK' ||
+            paymentResponse.payment_method == 'SLT_BRANCH')
+        "
+      >
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Receipt Details
+        </a>
+      </li> -->
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div class="row" *ngIf="paymentResponse">
+          <div class="col-lg-12 card mb-4">
+            <div class="col-lg-12 mt-4 row mb-4">
+              <h5 class="col-lg-12">
+                Payment Details - {{ paymentResponse.status }}
+              </h5>
+              <div class="col-lg-6 mt-4 row">
+                <h6 class="col-lg-12 mt-4">Student Info</h6>
+                <div class="col-lg-6 mt-4">
+                  ID<br />
+                  Name<br />
+                  Phone<br />
+                  Email<br />
+                  NIC<br /><br /><br /><br />
+                </div>
+                <div class="col-lg-6 mt-4">
+                  {{ paymentResponse.student.id }}<br />
+                  {{ paymentResponse.name }}<br />
+                  {{ paymentResponse.phone }}<br />
+                  {{ paymentResponse.student.email }}<br />
+                  {{ paymentResponse.student.nic }}<br />
+                </div>
+              </div>
+              <div class="col-lg-6 mt-4 row">
+                <h6 class="col-lg-12 mt-4">Payment Info</h6>
+                <div class="col-lg-6 mt-4">
+                  <b>Payment Method</b><br />
+                  Amount<br />
+                  Promo Code<br />
+                  Date<br />
+                  Bank<br />
+                  Branch<br />
+                  Created<br />
+                  Updated<br />
+                </div>
+                <div class="col-lg-6 mt-4">
+                  <b>{{ paymentResponse.payment_method }}</b
+                  ><br />
+                  {{ paymentResponse.amount }}<br />
+                  {{ paymentResponse.promocode_used }}<br />
+                  {{ paymentResponse.payment_date }}<br />
+                  {{ paymentResponse.bank }}<br />
+                  {{ paymentResponse.branch }}<br />
+                  {{ paymentResponse.created_at }}<br />
+                  {{ paymentResponse.updated_at }}<br />
+                </div>
+              </div>
+              <div
+                class="col-lg-6 mt-4 row"
+                *ngIf="
+                  paymentResponse &&
+                  (paymentResponse.payment_method == 'BANK' ||
+                    paymentResponse.payment_method == 'SLT_BRANCH')
+                "
+              >
+                <h6 class="col-lg-12 mt-4">Payment Slip</h6>
+                <div class="col-lg-12 mt-4">
+                  <a
+                    href="{{ STORAGE_BUCKET }}{{
+                      paymentResponse.uploaded_slip
+                    }}"
+                    target="_blank"
+                  >
+                    <img
+                      src="{{ STORAGE_BUCKET }}{{
+                        paymentResponse.uploaded_slip
+                      }}"
+                      class="teacher-img"
+                      alt=""
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-lg-12 card"
+            *ngIf="
+              paymentResponse &&
+              (paymentResponse.payment_method == 'BANK' ||
+                paymentResponse.payment_method == 'SLT_BRANCH')
+            "
+          >
+            <div class="col-lg-12 mt-4">
+              <h5>Update Payment Status</h5>
+              <div [formGroup]="formGroup">
+                <div class="form-group row mt-4">
+                  <label class="col-xl-2 col-form-label"> Status</label>
+                  <div class="col-xl-4">
+                    <select
+                      class="form-control form-control-lg form-control-solid"
+                      name="media"
+                      formControlName="status"
+                      [class.is-invalid]="isControlInvalid('status')"
+                      [class.is-valid]="isControlValid('status')"
+                    >
+                      <option value="PENDING">PENDING</option>
+                      <option value="APPROVED">APPROVED</option>
+                      <option value="REJECTED">REJECTED</option>
+                    </select>
+                  </div>
+                  <div class="col-xl-4">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-elevate"
+                      (click)="save()"
+                      [disabled]="formGroup.invalid || submitting"
+                    >
+                      <span *ngIf="submitting">Processing...</span
+                      ><span *ngIf="!submitting">Update</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)" *ngIf="
+      paymentResponse &&
+      (paymentResponse.payment_method == 'BANK' ||
+        paymentResponse.payment_method == 'SLT_BRANCH')
+    ">
+        <div class="row" *ngIf="paymentResponse">
+          <div class="col-lg-12 mb-4">
+            <div class="col-lg-12 row mb-4">
+              <div class="col-lg-6 row">
+                <div class="col-lg-6">
+                  ID<br />
+                  Reference No<br />
+                  Amount<br />
+                  Type<br />
+                  Status<br />
+                  Deposit Type<br />
+                </div>
+                <div class="col-lg-6">
+                  {{ paymentResponse.receipt.id }}<br />
+                  {{ paymentResponse.receipt.reference_number }}<br />
+                  {{ paymentResponse.receipt.amount }}<br />
+                  {{ paymentResponse.receipt.type }}<br />
+                  {{ paymentResponse.receipt.status }}<br />
+                  {{ paymentResponse.receipt.teleshop_bank }}<br />
+                </div>
+              </div>
+            
+            </div>
+          </div>
+         
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

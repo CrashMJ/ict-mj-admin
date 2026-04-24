@@ -1,0 +1,106 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW VOD TEACHER</h3>
+            <ng-container>
+                <!-- <ng-container >Edit</ng-container>
+                  <ng-container >Create</ng-container>
+                  customer -->
+                <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="name" [class.is-invalid]="isControlInvalid('name')"
+                                [class.is-valid]="isControlValid('name')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Address </label>
+                        <div class="col-lg-11 col-xl-9 ">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="address" [class.is-invalid]="isControlInvalid('address')"
+                                [class.is-valid]="isControlValid('address')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Email</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="email" [class.is-invalid]="isControlInvalid('email')"
+                                [class.is-valid]="isControlValid('email')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="password" formControlName="password" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">NIC</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="nic" [class.is-invalid]="isControlInvalid('nic')"
+                                [class.is-valid]="isControlValid('nic')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Phone Number</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="phone" [class.is-invalid]="isControlInvalid('phone')"
+                                [class.is-valid]="isControlValid('phone')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">City</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="city" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">District</label>
+                        <div class="col-lg-4">
+                            <select
+							class="form-control"
+							formControlName="district"
+							required
+							placeholder="Select District"
+                            [class.is-invalid]="isControlInvalid('district')"
+                            [class.is-valid]="isControlValid('district')"
+						>
+                                <option value="">Select</option>
+                                <option *ngFor="let district of districts" value="{{district.name_en}}">{{district.name_en}}</option>
+						    </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Subject</label>
+                        <div class="col-lg-4">
+                            <select formControlName="subject" class="form-control"
+                                [class.is-invalid]="isControlInvalid('subject')"
+                                [class.is-valid]="isControlValid('subject')">
+                                <option disabled>Subjects</option>
+                                <option value="{{subject.id}}" *ngFor="let subject of subjectObj">{{subject.title}}</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Profile Picture</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('profile_image',$event)"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Desktop Banner</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('banner_image',$event)" accept=".png, .jpg, .jpeg"/>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Mobile Banner</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('mobile_banner_image',$event)" accept=".png, .jpg, .jpeg"/>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Save</button>
+        </ng-container>
+    </div>
+</div>

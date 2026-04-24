@@ -1,0 +1,110 @@
+<div class="card card-custom gutter-b">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label">Option List</h3>
+            </div>
+            <div class="card-toolbar">
+                <a type="button" class="btn btn-primary" (click)="addNewOption()">New Option</a>
+            </div>
+        </div>
+        
+    <div class="col-lg-12 ml-5"style="width: 100%">
+            <div class="row mt-2">
+                <div class="col-lg-12">
+                    <h4 class="card-label">Filter</h4>
+                </div>
+                <div class="col-lg-12 row">
+                    <div class="col-lg-3">
+                        <label class="col-form-label">Institute </label>
+                        <input class="form-control form-control-lg form-control-solid" name="after_al_category_id" #categorySearch type="text" (keyup)="search('after_al_category_id',categorySearch.value)" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="col-form-label">Course </label>
+                        <input class="form-control form-control-lg form-control-solid" type="text" name="institute_id"  #institueSearch type="text" (keyup)="search('institute_id',institueSearch.value)"/>
+                    </div>
+                     <div class="col-lg-1 ml-1">
+                        <label class="col-form-label"></label>
+                        <a type="button" class="btn  form-control form-control-lg form-control-solid button-bottom" (click)="categorySearch.value = '';institueSearch.value = '';clearFilter()">Clear</a>
+                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive angular-bootstrap-table">
+                <mat-table #table2 [dataSource]="dataSource">
+                    
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.id }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="after_al_category_id">
+                        <mat-header-cell *matHeaderCellDef>After A/L Institute </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.after_al_category.name }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="institute_id">
+                        <mat-header-cell *matHeaderCellDef>Course  </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.institute.name }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="updated_at">
+                            <mat-header-cell *matHeaderCellDef>Updated Date </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.updated_at }}
+                            </mat-cell>
+                        </ng-container>
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-chip-list aria-label="">
+                                <mat-chip color="accent" *ngIf="row.status == 'ACTIVE'" selected>ACTIVE</mat-chip>
+                                <mat-chip color="warn" *ngIf="row.status == 'DISABLED'" selected>DISABLED</mat-chip>
+                            </mat-chip-list>
+                        </mat-cell>
+                       
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <button
+                                mat-icon-button
+                                color="primary"
+                                type="button"
+                                [routerLink]="['/afterAL/option', row.id]"
+                                matTooltip="Edit"
+                            >
+                                <mat-icon>create</mat-icon></button
+                            >&nbsp;
+                            <button
+                                mat-icon-button
+                                color="warn"
+                                type="button"
+                                (click)="delete(row.id,row.code)"
+                                matTooltip="Delete"
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                       
+                    </ng-container>
+                    <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></mat-row>
+                </mat-table>
+                <mat-paginator
+                [length]="pagination_data.total"
+                [pageSizeOptions]="pagination_item_counts"
+                (page)="pageEvent($event)"
+                showFirstLastButtons
+            ></mat-paginator>
+            </div>
+           
+        </div>
+    </div>

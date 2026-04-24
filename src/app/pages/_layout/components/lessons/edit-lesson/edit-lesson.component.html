@@ -1,0 +1,373 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Lesson
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Lesson Icon
+        </a>
+      </li>
+      <!-- <li class="nav-item">
+        <a
+          (click)="setActiveTab(3)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(3)"
+          role="tab"
+        >
+          Lesson images
+        </a>
+      </li> -->
+      <li class="nav-item" *ngIf="formGroup.get('type').value === 'package'">
+        <a
+          (click)="setActiveTab(4)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(4)"
+          role="tab"
+        >
+          Lesson videos
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Name</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="name"
+                [class.is-invalid]="isControlInvalid('name')"
+                [class.is-valid]="isControlValid('name')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Duration</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="duration"
+                [class.is-invalid]="isControlInvalid('duration')"
+                [class.is-valid]="isControlValid('duration')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Grade</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                formControlName="grade"
+                [class.is-invalid]="isControlInvalid('grade')"
+                [class.is-valid]="isControlValid('grade')"
+              >
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="sonic">Sonic Team SR</option>
+                <option value="2025">2025 A/L</option>
+                <option value="2026">2026 A/L</option>
+                <option value="2027">2027 A/L</option>
+                <option value="2028">2028 A/L</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Description</label>
+            <div class="col-xl-10">
+              <textarea
+                class="form-control form-control-lg form-control-solid"
+                formControlName="description"
+                [class.is-invalid]="isControlInvalid('description')"
+                [class.is-valid]="isControlValid('description')"
+                rows="4"
+              >
+              </textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Type</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="type"
+                [class.is-invalid]="isControlInvalid('type')"
+                [class.is-valid]="isControlValid('type')"
+                disabled
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Class Type</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="grade_type"
+                formControlName="grade_type"
+                [class.is-invalid]="isControlInvalid('grade_type')"
+                [class.is-valid]="isControlValid('grade_type')"
+              >
+                <option value="theory">Theory</option>
+                <option value="revision">Revision</option>
+                <option value="paper">Paper</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="formGroup.get('type').value === 'individual'">
+            <label class="col-xl-2 col-form-label">Url</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="url"
+                [class.is-invalid]="isControlInvalid('url')"
+                [class.is-valid]="isControlValid('url')"
+                [disabled]="formGroup.get('type').value === 'package'"
+              />
+            </div>
+            <!-- <div class="col-xl-2">
+              <button mat-button type="button" (click)="previewVideo()">Preview</button>
+            </div> -->
+          </div>
+         <!-- VIDEO PREVIEW (Only visible after clicking Preview) -->
+         <!-- <div class="form-group row">
+<div *ngIf="previewUrl" class="mt-4">
+<video #videoPlayer class="video-js vjs-default-skin" [src]="previewUrl" controls></video>
+
+          </div>
+         </div> 
+          -->
+
+          <!-- <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Trailer</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="trailer"
+                [class.is-invalid]="isControlInvalid('trailer')"
+                [class.is-valid]="isControlValid('trailer')"
+              />
+            </div>
+          </div> -->
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Tute PDF Ids (Enter Ids with comma)</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="tute_url"
+                [class.is-invalid]="isControlInvalid('tute_url')"
+                [class.is-valid]="isControlValid('tute_url')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Discounted Price </label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="discounted_price"
+                [class.is-invalid]="isControlInvalid('discounted_price')"
+                [class.is-valid]="isControlValid('discounted_price')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Price </label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="price"
+                [class.is-invalid]="isControlInvalid('price')"
+                [class.is-valid]="isControlValid('price')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">View Count(only for packages) </label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="package_view_count"
+                [class.is-invalid]="isControlInvalid('package_view_count')"
+                [class.is-valid]="isControlValid('package_view_count')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Status</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                formControlName="status"
+                [class.is-invalid]="isControlInvalid('status')"
+                [class.is-valid]="isControlValid('status')"
+              >
+                <option value="active">ACTIVE</option>
+                <option value="deactivate">DEACTIVATED</option>
+                <option value="deleted">DELETED</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-xl-11"></div>
+            <div class="col-xl-1">
+              <button
+                type="submit"
+                [disabled]="formGroup.invalid"
+                class="btn btn-primary btn-elevate"
+                (click)="save()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <div class="col-lg-6 text-center card mb-4">
+          <div
+            [formGroup]="formGroup"
+            class="col-lg-12 text-center mt-4"
+            *ngIf="lessonResponse"
+          >
+            <h5 class="col-xl-12 col-lg-12 col-form-label">Icon</h5>
+            <img
+              src="{{ STORAGE_BUCKET }}{{ lessonResponse.icon }}"
+              class="teacher-img"
+              alt=""
+            />
+            <div class="form-group row">
+              <div class="col-lg-9 col-xl-9">
+                <input
+                  class="form-control form-control-lg form-control-solid"
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  (change)="uploadFile('icon', $event)"
+                />
+              </div>
+              <div class="col-lg-3 col-xl-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-elevate"
+                  (click)="updateIcon()"
+                  [disabled]="formGroup.invalid"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+        <div class="mat-elevation-z8">
+          <div>
+            <!-- Lesson Selection Dropdown -->
+            <mat-form-field appearance="outline">
+              <mat-label>Select Lesson</mat-label>
+              <mat-select [(ngModel)]="selectedLesson" (selectionChange)="onLessonSelected()">
+                <mat-option *ngFor="let lesson of allLessons" [value]="lesson.id">{{ lesson.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <!-- Paid Type Dropdown (Shown Only If a Lesson is Selected) -->
+            <mat-form-field appearance="outline" *ngIf="selectedLesson">
+              <mat-label>Select Payment Type</mat-label>
+              <mat-select [(ngModel)]="selectedPaymentType">
+                <mat-option value="free">Free</mat-option>
+                <mat-option value="paid">Paid</mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <!-- Add Lesson Button -->
+            <button mat-raised-button color="primary" (click)="addLessonToPackage()" [disabled]="!selectedPaymentType">
+              Add Lesson
+            </button>
+          </div>
+        <!-- Lessons Table -->
+          <mat-table [dataSource]="dataSource3">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.video.name }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="grade_type">
+              <mat-header-cell *matHeaderCellDef>Class Type</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.video.grade_type }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="duration">
+              <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.video.duration }}</mat-cell>
+            </ng-container>
+
+            <!-- Paid Type (Editable) -->
+            <ng-container matColumnDef="paid_type">
+              <mat-header-cell *matHeaderCellDef>Paid Type</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <ng-container *ngIf="!row.isEdit; else editPaidType">
+                  {{ row.paid_type === 'free' ? 'Free' : 'Paid' }}
+                  <button mat-icon-button color="primary" (click)="row.isEdit = true">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </ng-container>
+
+                <ng-template #editPaidType>
+                  <mat-select [(ngModel)]="row.paid_type" (selectionChange)="savePaidType(row)">
+                    <mat-option value="free">Free</mat-option>
+                    <mat-option value="paid">Paid</mat-option>
+                  </mat-select>
+                </ng-template>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.video.price }}</mat-cell>
+            </ng-container>
+
+            <!-- Remove Lesson Button -->
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button mat-button color="warn" (click)="removeLessonPackage(row.id)">Remove</button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns3"></mat-row>
+          </mat-table>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end::Card-->

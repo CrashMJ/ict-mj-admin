@@ -1,0 +1,178 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Assignment List</h3>
+    </div>
+  </div>
+  <div class="col-lg-12 ml-5" style="width: 100%">
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <h4 class="card-label">Filter</h4>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-2">
+          <label class="col-form-label">Course Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="course_id"
+            #course_id
+            type="text"
+            (keyup)="search('course_id', course_id.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Module Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="module_id"
+            #module_id
+            type="text"
+            (keyup)="search('module_id', module_id.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Student Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="student_id"
+            #student_id
+            type="text"
+            (keyup)="search('student_id', student_id.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Student Name </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="student_name"
+            #student_name
+            type="text"
+            (keyup)="search('student_name', student_name.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Student Phone </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="student_phone"
+            #student_phone
+            type="text"
+            (keyup)="search('student_phone', student_phone.value)"
+          />
+        </div>
+        <div class="col-lg-1">
+          <label class="col-form-label"></label>
+          <a
+            type="button"
+            class="btn form-control form-control-lg form-control-solid button-bottom"
+            (click)="
+              student_phone.value = '';
+              student_name.value = '';
+              student_id.value = null;
+              course_id.value = null;
+              module_id.value = null;
+              clearFilter()
+            "
+            >Clear</a
+          >
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+      <mat-table #table2 [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="course_en_name">
+          <mat-header-cell *matHeaderCellDef>Course</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{
+              row.course_en_name.length > 20
+                ? (row.course_en_name | slice: 0:20) + ".."
+                : row.course_en_name
+            }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="module_en_name">
+          <mat-header-cell *matHeaderCellDef>Module </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{
+              row.module_en_name.length > 20
+                ? (row.module_en_name | slice: 0:20) + ".."
+                : row.module_en_name
+            }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="question_title">
+          <mat-header-cell *matHeaderCellDef>Question</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{
+              row.question_title.length > 20
+                ? (row.question_title | slice: 0:20) + ".."
+                : row.question_title
+            }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="is_rated">
+          <mat-header-cell *matHeaderCellDef>Rated</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-chip-list aria-label="">
+              <mat-chip color="accent" *ngIf="row.is_rated" selected
+                >Rated</mat-chip
+              >
+              <mat-chip
+                color="warn"
+                *ngIf="!row.is_rated"
+                selected
+                >Not Rated</mat-chip
+              >
+            </mat-chip-list>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+          <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.created_at }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              [routerLink]="['/assignments/edit', row.id]"
+              matTooltip="Edit"
+            >
+              <mat-icon>create</mat-icon></button
+            >&nbsp;
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="delete(row.id, row.description)"
+              matTooltip="Delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator
+        [length]="pagination_data.total"
+        [pageSizeOptions]="pagination_item_counts"
+        (page)="pageEvent($event)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

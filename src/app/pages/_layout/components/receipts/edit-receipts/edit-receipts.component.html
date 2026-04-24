@@ -1,0 +1,91 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Receipts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                    Roles and permission
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(3)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(3)" role="tab">
+                    Lessons
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Student Name</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="student_name" [class.is-invalid]="isControlInvalid('name')"
+                                [class.is-valid]="isControlValid('name')" />
+                        </div>
+                        <label class="col-xl-2  col-form-label">Phone</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="phone" [class.is-invalid]="isControlInvalid('phone')"
+                                [class.is-valid]="isControlValid('phone')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Tele Shop Bank</label>
+                        <div class="col-xl-4">
+                            <select formControlName="teleshop_bank" class="form-control"
+                            [class.is-invalid]="isControlInvalid('teleshop_bank')"
+                            [class.is-valid]="isControlValid('teleshop_bank')">
+                            <option disabled>Tele Shop Bank</option>
+                            <option value="BANK">Bank</option>
+                        </select>   
+                        </div>
+                        <label class="col-xl-2 col-form-label">Amount</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="amount" [class.is-invalid]="isControlInvalid('amount')"
+                            [class.is-valid]="isControlValid('amount')"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Type</label>
+                            <div class="col-xl-4">
+                                    <select formControlName="type" class="form-control"
+                                    [class.is-invalid]="isControlInvalid('type')"
+                                    [class.is-valid]="isControlValid('type')">
+                                    <option disabled>Type</option>
+                                    <option value="VOD">VOD</option>
+                                </select>
+                            </div>
+                         </div>
+                       <div class="form-group row">
+                            <div class="col-xl-11">
+                            </div>
+                            <div class="col-xl-1">
+                    <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+                   >Save</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                <p>2222222222222222</p>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+                <p>3333333333333333333333333333333</p>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

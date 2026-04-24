@@ -1,0 +1,104 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Payment Details
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="
+          paymentResponse &&
+          paymentResponse.payment_type == 'bank' &&
+          paymentResponse.bankPayments
+        "
+      >
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Bank Payment Details
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div
+          [formGroup]="formGroup"
+          *ngIf="
+            paymentResponse &&
+            paymentResponse.payment_type &&
+            paymentResponse.payment_type == 'bank'
+          "
+        >
+          <div class="form-group row mt-5">
+            <label class="col-xl-2 col-form-label"> Payment Status</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="status"
+                formControlName="status"
+                [class.is-invalid]="isControlInvalid('status')"
+                [class.is-valid]="isControlValid('status')"
+              >
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <ng-container>
+            <button
+              type="submit"
+              class="btn btn-primary btn-elevate"
+              (click)="save()"
+              [disabled]="submitting"
+            >
+              Save
+            </button>
+          </ng-container>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <h5 class="col-xl-12 col-lg-12 col-form-label">Transaction Info</h5>
+        <ngx-json-viewer
+          *ngIf="paymentResponse && paymentResponse.bankPayments"
+          [json]="paymentResponse.bankPayments"
+          [expanded]="false"
+        ></ngx-json-viewer>
+
+        <h5 class="col-xl-12 col-lg-12 col-form-label">Payment Slip</h5>
+        <img
+          *ngIf="
+            paymentResponse &&
+            paymentResponse.bankPayments &&
+            paymentResponse.bankPayments.slip
+          "
+          src="{{ STORAGE_BUCKET }}{{ paymentResponse.bankPayments.slip }}"
+          style="background-color: black; width: '50%'"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

@@ -1,0 +1,547 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Course Info
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Course Image
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(3)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(3)"
+          role="tab"
+        >
+          Course Modules
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(4)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(4)"
+          role="tab"
+        >
+          Course Classes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(5)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(5)"
+          role="tab"
+        >
+          Course Materials
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Title Sn</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="name_sn"
+                [class.is-invalid]="isControlInvalid('name_sn')"
+                [class.is-valid]="isControlValid('name_sn')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Title En</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="name_en"
+                [class.is-invalid]="isControlInvalid('name_en')"
+                [class.is-valid]="isControlValid('name_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Class Year</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="class_year"
+                [class.is-invalid]="isControlInvalid('class_year')"
+                [class.is-valid]="isControlValid('class_year')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Class Date</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="class_date_en"
+                [class.is-invalid]="isControlInvalid('class_date_en')"
+                [class.is-valid]="isControlValid('class_date_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Class Fee</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="course_fee"
+                [class.is-invalid]="isControlInvalid('course_fee')"
+                [class.is-valid]="isControlValid('course_fee')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Class Time</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="class_time"
+                [class.is-invalid]="isControlInvalid('class_time')"
+                [class.is-valid]="isControlValid('class_time')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Course Code</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="course_code"
+                [class.is-invalid]="isControlInvalid('course_code')"
+                [class.is-valid]="isControlValid('course_code')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Description 1 En</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_1_en"
+                [class.is-invalid]="isControlInvalid('description_1_en')"
+                [class.is-valid]="isControlValid('description_1_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Description 2 En</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_2_en"
+                [class.is-invalid]="isControlInvalid('description_2_en')"
+                [class.is-valid]="isControlValid('description_2_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Free Class URL</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_1_sn"
+                [class.is-invalid]="isControlInvalid('description_1_sn')"
+                [class.is-valid]="isControlValid('description_1_sn')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Free Class URL Description</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_2_sn"
+                [class.is-invalid]="isControlInvalid('description_2_sn')"
+                [class.is-valid]="isControlValid('description_2_sn')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label"> Stream</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_grade"
+                formControlName="class_grade"
+                [class.is-invalid]="isControlInvalid('class_grade')"
+                [class.is-valid]="isControlValid('class_grade')"
+              >
+                <option value="al">A/L</option>
+                <option value="ol">O/L</option>
+              </select>
+            </div>
+            <label class="col-xl-2 col-form-label"> Language</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="language"
+                formControlName="language"
+                [class.is-invalid]="isControlInvalid('language')"
+                [class.is-valid]="isControlValid('language')"
+              >
+                <option value="Sinhala">Sinhala</option>
+                <option value="English">English</option>
+                <!-- <option value="TAMIL">Tamil</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label"> Delivery Type</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_delivery_type"
+                formControlName="class_delivery_type"
+                [class.is-invalid]="isControlInvalid('class_delivery_type')"
+                [class.is-valid]="isControlValid('class_delivery_type')"
+              >
+                <option value="online">Online</option>
+                <option value="physical">Physical</option>
+                <!-- <option value="TAMIL">Tamil</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group row"></div>
+        </div>
+        <div class="modal-footer">
+          <ng-container>
+            <button
+              type="submit"
+              class="btn btn-primary btn-elevate"
+              (click)="save()"
+            >
+              Save
+            </button>
+          </ng-container>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <div class="col-lg-6 text-center card mb-4">
+          <div
+            [formGroup]="formGroup2"
+            class="col-lg-12 text-center mt-4"
+            *ngIf="subjectResponse"
+          >
+            <h5 class="col-xl-12 col-lg-12 col-form-label">
+              Subject Icon Image
+            </h5>
+            <img
+              src="{{ STORAGE_BUCKET }}{{ subjectResponse.icon }}"
+              class="teacher-img"
+              style="background-color: black"
+              alt=""
+            />
+            <div class="form-group row">
+              <div class="col-lg-9 col-xl-9">
+                <input
+                  class="form-control form-control-lg form-control-solid"
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  (change)="uploadFile('image', $event)"
+                />
+              </div>
+              <div class="col-lg-3 col-xl-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-elevate"
+                  (click)="updateImage()"
+                  [disabled]="formGroup2.invalid"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+        <a type="button" class="btn btn-primary mb-4" (click)="addNewModule()"
+          >New Module</a
+        >
+
+        <div class="mat-elevation-z8">
+          <mat-table #table4 [dataSource]="dataSource4">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name_en">
+              <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.name_en }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="title_tag_en">
+              <mat-header-cell *matHeaderCellDef>Tag </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.title_tag_en }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="module_code">
+              <mat-header-cell *matHeaderCellDef>Code </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.module_code }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef>created_at </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.created_at }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                (click)="editModule(row.id)"
+                matTooltip="Edit"
+              >
+                <mat-icon>create</mat-icon></button
+              >&nbsp;
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  (click)="deleteModule(row.id)"
+                  matTooltip="Delete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns4"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns4"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data4.total"
+            [pageSizeOptions]="pagination_item_counts4"
+            (page)="pageEvent4($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+        <a type="button" class="btn btn-primary mb-4" (click)="addNewClass()"
+          >New Class</a
+        >
+        <div class="mat-elevation-z8">
+          <mat-table #table1 [dataSource]="dataSource1">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef>Title </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.title }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="start_date">
+              <mat-header-cell *matHeaderCellDef>Start Date </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.start_date }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="start_time">
+              <mat-header-cell *matHeaderCellDef>Start Time </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.start_time }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="session_type">
+              <mat-header-cell *matHeaderCellDef>Type </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.session_type }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef>created_at </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.created_at }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                (click)="editClass(row.id)"
+                matTooltip="Edit"
+              >
+                <mat-icon>create</mat-icon></button
+              >&nbsp;
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  (click)="deleteClass(row.id)"
+                  matTooltip="Delete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns1"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data1.total"
+            [pageSizeOptions]="pagination_item_counts1"
+            (page)="pageEvent1($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+        <a type="button" class="btn btn-primary mb-4" (click)="addNewMaterial()"
+          >New Material</a
+        >
+        <div class="mat-elevation-z8">
+          <mat-table #table1 [dataSource]="dataSource3">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef>Title </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.title_en }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef>Description </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.description_en }}
+              </mat-cell>
+            </ng-container> 
+            <ng-container matColumnDef="type">
+              <mat-header-cell *matHeaderCellDef>Type </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.type }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="module_code">
+              <mat-header-cell *matHeaderCellDef>Module Id </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.module_id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="file">
+              <mat-header-cell *matHeaderCellDef>Url </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <!-- {{ row.file }} -->
+                <a
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  matTooltip="Edit"
+                  href="{{ row.url }}"
+                  target="_blank"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </a>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef>created_at </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.created_at }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action {{pagination_data3.total}}</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                (click)="editMaterial(row.id)"
+                matTooltip="Edit"
+              >
+                <mat-icon>create</mat-icon></button
+              >&nbsp;
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  (click)="deleteMaterial(row.id)"
+                  matTooltip="Delete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns3"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns3"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data3.total"
+            [pageSizeOptions]="pagination_item_counts3"
+            (page)="pageEvent3($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

@@ -1,0 +1,106 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Inquiry
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Student Name</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="student_name"
+                [class.is-invalid]="isControlInvalid('student_name')"
+                [class.is-valid]="isControlValid('student_name')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Student Phone</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="student_phone"
+                [class.is-invalid]="isControlInvalid('student_phone')"
+                [class.is-valid]="isControlValid('student_phone')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Grade</label>
+            <div class="col-xl-10">
+              <select
+							class="form-control"
+							formControlName="class_grade"
+							required
+							placeholder="Select Grade"
+                            [class.is-invalid]="isControlInvalid('class_grade')"
+                            [class.is-valid]="isControlValid('class_grade')"
+						>
+                                <option value="">Select</option>
+                                <option value="miner">Miner</option>
+                                <option value="ol">O/L</option>
+                                <option value="al">A/L</option>
+						    </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Exam Year</label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="exam_year"
+                [class.is-invalid]="isControlInvalid('exam_year')"
+                [class.is-valid]="isControlValid('exam_year')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Comment</label>
+            <div class="col-xl-10">
+              <textarea class="form-control form-control-lg form-control-solid" type="text" formControlName="comment" rows="10"
+              [class.is-invalid]="isControlInvalid('comment')"
+              [class.is-valid]="isControlValid('comment')"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <ng-container>
+            <button
+              type="submit"
+              class="btn btn-primary btn-elevate"
+              (click)="save()"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

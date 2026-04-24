@@ -1,0 +1,48 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW FREE CARD</h3>
+            <ng-container>
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-12 col-lg-12 col-form-label">Student ID</label>
+                        <div class="col-lg-12 col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="student_id" [class.is-invalid]="isControlInvalid('student_id')"
+                                [class.is-valid]="isControlValid('student_id')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-12 col-lg-12 col-form-label">Teacher ID</label>
+                        <div class="col-lg-11 col-xl-12">
+                            <!-- <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="teacher_id" [class.is-invalid]="isControlInvalid('teacher_id')"
+                                [class.is-valid]="isControlValid('teacher_id')" /> -->
+                                <select formControlName="teacher_id" class="form-control"
+                                [class.is-invalid]="isControlInvalid('teacher_id')"
+                                [class.is-valid]="isControlValid('teacher_id')">
+                                <option disabled>Teacher</option>
+                                <option value="{{teacher.id}}" *ngFor="let teacher of teacherObj">{{teacher.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-12  col-form-label">No of Months</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="number"
+                                formControlName="number_of_months" [class.is-invalid]="isControlInvalid('number_of_months')"
+                                [class.is-valid]="isControlValid('number_of_months')" />
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+        </ng-container>
+    </div>
+</div>

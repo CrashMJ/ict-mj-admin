@@ -1,0 +1,316 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Video Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                    Image
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(3)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(3)" role="tab">
+                    Play
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(4)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(4)" role="tab">
+                    Document
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(5)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(5)" role="tab">
+                    Enrollments
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Video Code</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="video_code" [class.is-invalid]="isControlInvalid('video_code')"
+                                [class.is-valid]="isControlValid('video_code')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Duration</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="duration" [class.is-invalid]="isControlInvalid('duration')"
+                                [class.is-valid]="isControlValid('duration')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label"> Medium</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="medium" formControlName="medium" [class.is-invalid]="isControlInvalid('medium')"
+                                [class.is-valid]="isControlValid('medium')">
+                                <option value="SINHALA">Sinhala</option>
+                                <option value="ENGLISH">English</option>
+                                <option value="TAMIL">Tamil</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Grade</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="medium" formControlName="grade" [class.is-invalid]="isControlInvalid('grade')"
+                                [class.is-valid]="isControlValid('grade')">
+                                <option value="GRADE12">Grade 12</option>
+                                <option value="GRADE13">Grade 13</option>
+                                <option value="PRACTICAL">Practical</option>
+                                <option value="REVISION">Revision</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Price</label>
+                            <div class="col-xl-4">
+                                <input class="form-control form-control-lg form-control-solid" type="number" formControlName="price" [class.is-invalid]="isControlInvalid('price')"
+                                    [class.is-valid]="isControlValid('price')" />
+                            </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-12 col-form-label">Module</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="module_name" [class.is-invalid]="isControlInvalid('module_name')"
+                                [class.is-valid]="isControlValid('module_name')" />
+                        </div>
+                        <label class="col-xl-12 col-form-label">Video Title</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="title" [class.is-invalid]="isControlInvalid('title')"
+                                [class.is-valid]="isControlValid('title')" />
+                        </div>
+                        <label class="col-xl-12 col-form-label">Sub Title</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="sub_title" [class.is-invalid]="isControlInvalid('sub_title')"
+                                [class.is-valid]="isControlValid('sub_title')" />
+                        </div>
+                        <label class="col-xl-12 col-form-label">Description</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="description" />
+                        </div>
+                        <label class="col-xl-12 col-form-label">Video Link Code (Vimeo Embed Code - Eg: 12YECD)</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="video_link" [class.is-invalid]="isControlInvalid('video_link')"
+                                [class.is-valid]="isControlValid('video_link')" />
+                        </div>
+                        <label class="col-xl-12 col-form-label">Preview Video Link (Youtube Embed Code - Eg: re43fds4)</label>
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="preview_video_link" [class.is-invalid]="isControlInvalid('preview_video_link')"
+                                [class.is-valid]="isControlValid('preview_video_link')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                       
+                        <label class="col-xl-2 col-form-label">Teacher</label>
+                        <div class="col-lg-4">
+                            <select formControlName="teacher" class="form-control"
+                                [class.is-invalid]="isControlInvalid('teacher')"
+                                [class.is-valid]="isControlValid('teacher')">
+                                <option disabled>Teacher</option>
+                                <option value="{{teacher.id}}" *ngFor="let teacher of teacherObj">{{teacher.name}}</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Status</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="status" formControlName="status" [class.is-invalid]="isControlInvalid('status')"
+                                [class.is-valid]="isControlValid('status')">
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="DISABLED">DISABLED</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                <div class="col-lg-6 text-center card mb-4">
+                    <div [formGroup]="formGroup3" class="col-lg-12 text-center mt-4" *ngIf="vidoeResponse">
+                        <h5 class="col-xl-12 col-lg-12 col-form-label">Thumbnail</h5>
+                        <img src="{{STORAGE_BUCKET}}{{vidoeResponse.thumbnail}}" class="teacher-img" alt="">
+                        <div class="form-group row">
+                            <div class="col-lg-9 col-xl-9">
+                                <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('thumbnail',$event)"/>
+                            </div>
+                            <div class="col-lg-3 col-xl-3">
+                                <button type="submit" class="btn btn-primary btn-elevate" (click)="updateThumb()" [disabled]="formGroup3.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)" *ngIf="vidoeResponse">
+                <div class="row">
+                    <div class="col-lg-5 text-center card mb-4 pt-3 pb-3 mr-5">
+                        <div lass="col-lg-12 text-center card mb-4 pt-3 pb-3 mr-5">
+                            <h5 class="col-lg-12">Preview</h5>
+                            <youtube-player 
+                                videoId="{{vidoeResponse.preview_video_link}}" 
+                                suggestedQuality="highres" 
+                                [height]="250" 
+                                [width]="500" 
+                                [startSeconds]="4"
+                                [endSeconds]="8">
+                            </youtube-player>
+                        </div>
+                       
+                    </div>
+                    <div class="col-lg-6 text-center card  mb-4 pt-3 pb-3 ml-1">
+                        <div lass="col-lg-12 text-center" style="width: 100% !important; "> 
+                            <h5 class="col-lg-12">Video</h5>
+                            <div style="  width: 100% !important;
+                            height: 100% !important;" [innerHtml]='vimeo_iframe_html'></div>
+                        </div>
+                       
+                    </div>
+                </div>
+              
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+                <div class="col-lg-12 text-center card mb-4 row">
+                      
+                        <div [formGroup]="formGroup2" class="col-lg-6 text-center mt-4" *ngIf="vidoeResponse">
+                            <h5 class="col-xl-12 col-lg-12 col-form-label">Update Tute</h5>
+                            <div class="form-group row">
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" accept=".pdf" (change)="uploadFile('tute',$event)"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateTute()" [disabled]="formGroup2.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                        <ngx-doc-viewer  *ngIf="vidoeResponse && vidoeResponse.tute" url="{{STORAGE_BUCKET}}{{vidoeResponse.tute}}" viewer="google"  style="width:100%;height:80vh;">
+                        </ngx-doc-viewer>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+                <div class="mat-elevation-z8">
+                    <mat-table #table2 [dataSource]="dataSource2">
+				
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="video_id">
+                            <mat-header-cell *matHeaderCellDef>Video ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.video.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="video_price">
+                            <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.video_price }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="video_code">
+                            <mat-header-cell *matHeaderCellDef>video_code </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.video.video_code }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="student_id">
+                            <mat-header-cell *matHeaderCellDef>Student ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.name }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.email }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.phone }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-chip-list aria-label="">
+                                    <mat-chip color="" *ngIf="row.status == 'PENDING'" selected>PENDING</mat-chip>
+                                    <mat-chip color="accent" *ngIf="row.status == 'APPROVED'" selected>APPROVED</mat-chip>
+                                    <mat-chip color="warn" *ngIf="row.status == 'REJECTED'" selected>REJECTED</mat-chip>
+                                </mat-chip-list>
+                            </mat-cell>
+                           
+                        </ng-container>
+                        <ng-container matColumnDef="created_at">
+                            <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.created_at }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <button
+                                    mat-icon-button
+                                    color="primary"
+                                    type="button"
+                                    [routerLink]="['/vod-enrollments/edit', row.id]"
+                                    matTooltip="Edit"
+                                >
+                                    <mat-icon>create</mat-icon></button
+                                >&nbsp;
+                                <!-- <button
+                                    mat-icon-button
+                                    color="warn"
+                                    type="button"
+                                    (click)="delete(row.id,row.name)"
+                                    matTooltip="Delete"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                </button> -->
+                            </mat-cell>
+                           
+                        </ng-container>
+                        <mat-header-row
+                            *matHeaderRowDef="displayedColumns2"
+                        ></mat-header-row>
+                        <mat-row
+                            *matRowDef="let row; columns: displayedColumns2"
+                        ></mat-row>
+                    </mat-table>
+                    <mat-paginator
+                        [length]="pagination_data2.total"
+                        [pageSizeOptions]="pagination_item_counts2"
+                        (page)="pageEvent2($event)"
+                        showFirstLastButtons
+                    ></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

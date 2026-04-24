@@ -1,0 +1,127 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW VIDEO</h3>
+            <ng-container>
+                <!-- <ng-container >Edit</ng-container>
+                          <ng-container >Create</ng-container>
+                          customer -->
+                <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Video Code</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="videoCode" [class.is-invalid]="isControlInvalid('medium')"
+                                [class.is-valid]="isControlValid('medium')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Duration</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="duration" [class.is-invalid]="isControlInvalid('medium')"
+                                [class.is-valid]="isControlValid('medium')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label"> Medium</label>
+                        <div class="col-lg-4">
+                            <select class="form-control form-control-lg form-control-solid" name="medium" formControlName="medium" [class.is-invalid]="isControlInvalid('medium')"
+                                [class.is-valid]="isControlValid('medium')">
+                                <option value="SINHALA">Sinhala</option>
+                                <option value="ENGLISH">English</option>
+                                <option value="TAMIL">Tamil</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Grade</label>
+                        <div class="col-lg-4">
+                            <select class="form-control form-control-lg form-control-solid" name="medium" formControlName="grade" [class.is-invalid]="isControlInvalid('grade')"
+                            [class.is-valid]="isControlValid('grade')">
+                            <option value="GRADE12">Grade 12</option>
+                            <option value="GRADE13">Grade 13</option>
+                            <option value="PRACTICAL">Practical</option>
+                            <option value="REVISION">Revision</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-form-label">Module</label>
+                        <div class="col-lg-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="module_name" [class.is-invalid]="isControlInvalid('module_name')"
+                                [class.is-valid]="isControlValid('module_name')" />
+                        </div>
+                       
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-form-label">Video Title</label>
+                        <div class="col-lg-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="videoTitle" [class.is-invalid]="isControlInvalid('videoTitle')"
+                                [class.is-valid]="isControlValid('videoTitle')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-form-label">Sub Title</label>
+                        <div class="col-lg-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="subTitle" [class.is-invalid]="isControlInvalid('subTitle')"
+                                [class.is-valid]="isControlValid('subTitle')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-form-label">Description</label>
+                        <div class="col-lg-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="description" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Video Link Code</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="videoLink" [class.is-invalid]="isControlInvalid('videoLink')"
+                                [class.is-valid]="isControlValid('videoLink')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Preview Video Link Code</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="previewVideoLink" [class.is-invalid]="isControlInvalid('previewVideoLink')"
+                                [class.is-valid]="isControlValid('previewVideoLink')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Teacher</label>
+                        <div class="col-lg-4">
+                            <select formControlName="teacher" class="form-control"
+                                [class.is-invalid]="isControlInvalid('teacher')"
+                                [class.is-valid]="isControlValid('teacher')">
+                                <option disabled>Teacher</option>
+                                <option value="{{teacher.id}}" *ngFor="let teacher of teacherObj">{{teacher.name}}</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Price</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="price" [class.is-invalid]="isControlInvalid('price')"
+                                [class.is-valid]="isControlValid('price')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Thumbnail</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('thumbnail',$event)" accept=".png, .jpg, .jpeg"/>
+                        </div>
+                        <label class="col-xl-2 col-form-label">PDF Document</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('tute',$event)" accept=".pdf"/>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+            <!-- [disabled]="formGroup.invalid" -->
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+        </ng-container>
+    </div>
+</div>

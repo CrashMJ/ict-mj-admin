@@ -1,0 +1,105 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Notification
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                    <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                        Students Answered
+                    </a>
+                </li> -->
+
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Title</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="title" [class.is-invalid]="isControlInvalid('title')"
+                                [class.is-valid]="isControlValid('title')" />
+                        </div>
+                        <label class="col-xl-2  col-form-label">Description</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="description" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label"> Type</label>
+                        <div class=" col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="type" formControlName="type" [class.is-invalid]="isControlInvalid('type')"
+                                [class.is-valid]="isControlValid('type')">
+                                <option value="TextOnly">Text Only</option>
+                                <option value="PushNotification">Text, Push Notification</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label"> Target</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="target" formControlName="target" [class.is-invalid]="isControlInvalid('target')"
+                                [class.is-valid]="isControlValid('target')">
+                                <option value="Sinhala">ALL</option>
+                                <option value="English">Stream</option>
+                                <option value="English">Area</option>
+                                <option value="English">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Stream</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="stream" formControlName="stream" [class.is-invalid]="isControlInvalid('stream')"
+                                [class.is-valid]="isControlValid('stream')">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Area</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="area" formControlName="area" [class.is-invalid]="isControlInvalid('area')"
+                                [class.is-valid]="isControlValid('area')">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Year</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="year" formControlName="year" [class.is-invalid]="isControlInvalid('year')"
+                                [class.is-valid]="isControlValid('year')">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Save</button>
+                    </ng-container>
+                </div>
+            </div>
+            <!-- <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                    <p>2222222222222222</p>
+                </div>
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+                    <p>3333333333333333333333333333333</p>
+                </div> -->
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

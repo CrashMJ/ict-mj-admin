@@ -1,0 +1,169 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Course List</h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" (click)="addNewSubject()"
+        >New Course</a
+      >
+    </div>
+  </div>
+  <div class="col-lg-12 ml-5" style="width: 100%">
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <h4 class="card-label">Filter</h4>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-3">
+          <label class="col-form-label">Type </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="stream"
+            #streamSearch
+            type="text"
+            (change)="search('stream', streamSearch.value)"
+          >
+            <option value=""></option>
+            <option value="al">A/L</option>
+            <option value="ol">A/L</option>
+          </select>
+          <!-- <input class="form-control form-control-lg form-control-solid" name="stream" #streamSearch
+                        type="text" (keyup)="search('stream',streamSearch.value)" /> -->
+        </div>
+        <div class="col-lg-3">
+          <label class="col-form-label">Medium </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="medium"
+            #mediumSearch
+            type="text"
+            (change)="search('medium', mediumSearch.value)"
+          >
+            <option value=""></option>
+            <option value="Sinhala">Sinhala</option>
+            <option value="English">English</option>
+            <!-- <option value="Tamil">Tamil</option> -->
+          </select>
+          <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="medium"  #mediumSearch type="text" (keyup)="search('medium',mediumSearch.value)"/> -->
+        </div>
+        <div class="col-lg-3">
+          <label class="col-form-label">Status </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="status"
+            #statusSearch
+            type="text"
+            (change)="search('status', statusSearch.value)"
+          >
+            <option value=""></option>
+            <option value="active">ACTIVE</option>
+            <option value="blocked">BLOCKED</option>
+          </select>
+          <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="status" #statusSearch type="text" (keyup)="search('status',statusSearch.value)"/> -->
+        </div>
+        <!-- <div class="col-lg-1">
+                    <label class="col-form-label"></label>
+                    <a type="button" class="btn form-control form-control-lg btn-primary button-bottom" (click)="addNewAdmin()">Filter</a>
+                 </div> -->
+        <div class="col-lg-1 ml-1">
+          <label class="col-form-label"></label>
+          <a
+            type="button"
+            class="btn form-control form-control-lg form-control-solid button-bottom"
+            (click)="
+              streamSearch.value = '';
+              mediumSearch.value = '';
+              statusSearch.value = '';
+              clearFilter()
+            "
+            >Clear</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+      <mat-table #table2 [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name_en">
+          <mat-header-cell *matHeaderCellDef>Title </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.name_en }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="class_grade">
+          <mat-header-cell *matHeaderCellDef>Grade </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.class_grade }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="class_year">
+          <mat-header-cell *matHeaderCellDef>Year </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.class_year }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="language">
+          <mat-header-cell *matHeaderCellDef>Language </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.language }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-chip-list aria-label="">
+              <mat-chip color="accent" *ngIf="row.status == 'active'" selected
+                >ACTIVE</mat-chip
+              >
+              <mat-chip
+                color="warn"
+                *ngIf="row.status == 'deactivated'"
+                selected
+                >DISABLED</mat-chip
+              >
+            </mat-chip-list>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              [routerLink]="['/course/edit', row.id]"
+              matTooltip="Edit"
+            >
+              <mat-icon>create</mat-icon></button
+            >&nbsp;
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="delete(row.id, row.title)"
+              matTooltip="Delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator
+        [length]="pagination_data.total"
+        [pageSizeOptions]="pagination_item_counts"
+        (page)="pageEvent($event)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

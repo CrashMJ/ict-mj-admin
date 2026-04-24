@@ -1,0 +1,144 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Payment Details
+        </a>
+      </li>
+      <li
+        class="nav-item" >
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+        Student Details
+        </a>
+      </li>
+      <li
+      class="nav-item" >
+      <a
+        (click)="setActiveTab(3)"
+        class="nav-link cursor-pointer"
+        [ngClass]="getActiveTabCSSClass(3)"
+        role="tab"
+      >
+        Video Details
+      </a>
+    </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div class="row" *ngIf="vodEnrollResponse">
+          <div class="col-lg-12 card mb-4">
+            <div class="col-lg-12 mt-4 row mb-4">
+              <h5 class="col-lg-12">
+                Enrolment Details - {{ vodEnrollResponse.status }}
+              </h5>
+              <div class="col-lg-6 mt-4 row">
+                <h6 class="col-lg-12 mt-4">Student Info</h6>
+                <div class="col-lg-6 mt-4">
+                  ID<br />
+                  Price<br />
+                  Type<br />
+                  Created<br />
+                  Updated<br /><br /><br /><br />
+                </div>
+                <div class="col-lg-6 mt-4">
+                  {{ vodEnrollResponse.id }}<br />
+                  Rs. {{ vodEnrollResponse.live_class.fee }}<br />
+                  {{ vodEnrollResponse.type }}<br />
+                  {{ vodEnrollResponse.created_at }}<br />
+                  {{ vodEnrollResponse.updated_at }}<br />
+                </div>
+              </div>
+              <div class="col-lg-6 mt-4 row">
+                <h6 class="col-lg-12 mt-4">Payment Info</h6>
+                <div class="col-lg-6 mt-4">
+                  <b>Payment Method</b><br />
+                  Promo Code<br />
+                  Date<br />
+                  Bank<br />
+                  Branch<br />
+                  Created<br />
+                  Updated<br />
+                </div>
+                <div class="col-lg-6 mt-4">
+                  <b>{{ vodEnrollResponse.live_purchase.payment_method }}</b
+                  ><br />
+                  {{ vodEnrollResponse.live_purchase.promocode_used }}<br />
+                  {{ vodEnrollResponse.live_purchase.payment_date }}<br />
+                  {{ vodEnrollResponse.live_purchase.bank }}<br />
+                  {{ vodEnrollResponse.live_purchase.branch }}<br />
+                  {{ vodEnrollResponse.live_purchase.created_at }}<br />
+                  {{ vodEnrollResponse.live_purchase.updated_at }}<br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <div class="row" *ngIf="vodEnrollResponse">
+          <div class="col-lg-12 mb-4">
+            <div class="col-lg-12 row mb-4">
+              <div class="col-lg-6 row">
+                <div class="col-lg-6">
+                  ID<br/>
+                  Name<br/>
+                  Phone<br/>
+                  Email<br/>
+                  NIC<br/>
+              </div>
+              <div class="col-lg-6">
+                  {{vodEnrollResponse.student.id}}<br/>
+                  {{vodEnrollResponse.student.name}}<br/>
+                  {{vodEnrollResponse.student.phone}}<br/>
+                  {{vodEnrollResponse.student.email}}<br/>
+                  {{vodEnrollResponse.student.nic}}<br/>
+              </div>
+              </div>
+            
+            </div>
+          </div>
+         
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+        <div class="col-lg-12 row mb-4" *ngIf="vodEnrollResponse">
+            <div class="col-lg-6 row">
+                <div class="col-lg-6">
+                    ID<br/>
+                    <b>Topic</b><br/>
+                    Description<br/>
+                    Type<br/>
+                </div>
+                <div class="col-lg-6">
+                    {{vodEnrollResponse.live_class.id}}<br/>
+                    <b>{{vodEnrollResponse.live_class.topic}}</b><br/>
+                    {{vodEnrollResponse.live_class.description}}<br/>
+                    {{vodEnrollResponse.live_class.type}}<br/>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

@@ -1,0 +1,53 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW COUPON</h3>
+            <ng-container>
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Student ID</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="student_id" [class.is-invalid]="isControlInvalid('student_id')"
+                                [class.is-valid]="isControlValid('student_id')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Purchase ID</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="purchase" [class.is-invalid]="isControlInvalid('purchase')"
+                                [class.is-valid]="isControlValid('purchase')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Type</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <select formControlName="type" class="form-control"
+                                [class.is-invalid]="isControlInvalid('type')"
+                                [class.is-valid]="isControlValid('type')">
+                                <option value="NON_COUNTABLE">NON COUNTABLE</option>
+                                <option value="COUNTABLE">COUNTABLE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3  col-form-label">Usage Count</label>
+                        <div class="col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="usage_count" [class.is-invalid]="isControlInvalid('usage_count')"
+                                [class.is-valid]="isControlValid('usage_count')" />
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+        </ng-container>
+    </div>
+</div>

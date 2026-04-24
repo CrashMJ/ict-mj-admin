@@ -1,0 +1,62 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Setting Info
+                </a>
+            </li>
+          
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup"  *ngIf="settingResponse && settingResponse.type">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">SLUG</label>
+                        <label class="col-xl-4 col-form-label">{{settingResponse.slug}}</label>
+                        <label class="col-xl-2 col-form-label">Type</label>
+                        <label class="col-xl-4 col-form-label">{{settingResponse.type}}</label>
+                    </div>
+                    <div class="form-group row" *ngIf="settingResponse.type && settingResponse.type=='url'">
+                        <label class="col-xl-2 col-form-label">URL</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="url" [class.is-invalid]="isControlInvalid('url')"
+                                [class.is-valid]="isControlValid('url')" />
+                        </div>
+                        <span class="col-xl-12 col-form-label">*  For Youtube URL please only add the video code</span>
+
+                        <hr>
+                        <div class="col-xl-12 mt-5"><h4>Currently Saved Video</h4></div>
+                        <div class="col-xl-12">
+                            <youtube-player 
+                            videoId="{{settingResponse.url}}" 
+                            suggestedQuality="highres" 
+                            [height]="250" 
+                            [width]="500" 
+                            [startSeconds]="4"
+                            [endSeconds]="8">
+                        </youtube-player>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

@@ -1,0 +1,65 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+        <!--begin::Header-->
+        <div class="card-header card-header-tabs-line">
+            <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+                <li class="nav-item">
+                    <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                        Profile
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+    
+        <div class="card-body">
+            <div class="tab-content pt-3">
+                <!-- begin::Header -->
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                    <div [formGroup]="formGroup">
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Name</label>
+                            <div class="col-xl-4">
+                                <input class="form-control form-control-lg form-control-solid" type="text" formControlName="name" [class.is-invalid]="isControlInvalid('name')"
+                                    [class.is-valid]="isControlValid('name')" />
+                            </div>
+                            <label class="col-xl-2  col-form-label">Email</label>
+                            <div class="col-xl-4">
+                                <input class="form-control form-control-lg form-control-solid" type="text" formControlName="email" [class.is-invalid]="isControlInvalid('email')"
+                                    [class.is-valid]="isControlValid('email')" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Phone Number</label>
+                            <div class="col-xl-4">
+                                <input class="form-control form-control-lg form-control-solid" type="text" formControlName="phoneNumber" [class.is-invalid]="isControlInvalid('phoneNumber')"
+                                    [class.is-valid]="isControlValid('phoneNumber')" />
+                            </div>
+                            <label class="col-xl-2 col-form-label">Option ID</label>
+                            <div class="col-xl-4">
+                                    <select class="form-control form-control-lg form-control-solid" name="after_al_option_id"
+                                    formControlName="after_al_option_id"
+                                    [class.is-invalid]="isControlInvalid('after_al_option_id')"
+                                    [class.is-valid]="isControlValid('after_al_option_id')">
+                                    <option *ngFor="let item of optionObj" [value]="item.id">{{item.id}}</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                                <div class="col-xl-11">
+                                </div>
+                                <div class="col-xl-1">
+                        <button type="submit" [disabled]="formGroup.invalid" class="btn btn-primary btn-elevate" (click)="save()"
+                       >Save</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!--end::Header-->
+        <!--begin::Form-->
+    </div>
+    <!--end::Card-->

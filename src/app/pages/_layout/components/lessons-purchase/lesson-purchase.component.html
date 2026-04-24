@@ -1,0 +1,278 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Lesson Purchase History</h3>
+    </div>
+  </div>
+
+  <div class="col-lg-12 ml-5" style="width: 100%">
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <h4 class="card-label">Filter</h4>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-2">
+          <label class="col-form-label">Payment ID </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="id"
+            #paymentIdSearch
+            type="text"
+            (keyup)="search('id', paymentIdSearch.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Lesson Name </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="keyword"
+            #keywordSearch
+            type="text"
+            (keyup)="search('keyword', keywordSearch.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Lesson ID </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="video_id"
+            #lessonIdSearch
+            type="text"
+            (keyup)="search('video_id', lessonIdSearch.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Student ID </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="student_id"
+            #studentIdSearch
+            type="text"
+            (keyup)="search('student_id', studentIdSearch.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Payment Method </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="payment_type"
+            #payment_type
+            type="text"
+            (change)="search('payment_type', payment_type.value)"
+          >
+            <option value=""></option>
+            <option value="payhere">PAY HERE</option>
+            <option value="bank">BANK</option>
+          </select>
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label"></label>
+          <a
+            type="button"
+            class="btn btn-primary button-bottom"
+            (click)="addPayment()"
+            >New Payment</a
+          >
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Payment Status </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="payment_status"
+            #paymentStatus
+            type="text"
+            (change)="search('payment_status', paymentStatus.value)"
+          >
+            <option value="">- Select -</option>
+            <option value="pending">PENDING</option>
+            <option value="approved">APPROVED</option>
+            <option value="canceled">CANCELED</option>
+            <option value="failed">FAILED</option>
+          </select>
+          <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="status"  #statusSearch type="text" (keyup)="search('status',statusSearch.value)"/> -->
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Status </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="status"
+            #status
+            type="text"
+            (change)="search('status', status.value)"
+          >
+            <option value="">- Select -</option>
+            <option value="pending">PENDING</option>
+            <option value="active">ACTIVE</option>
+            <option value="expired">EXPIRED</option>
+            <option value="canceled">CANCELED</option>
+          </select>
+          <!-- <input class="form-control form-control-lg form-control-solid" type="text" name="status"  #statusSearch type="text" (keyup)="search('status',statusSearch.value)"/> -->
+        </div>
+        <div class="col-lg-2 mt-2">
+          <a
+            type="button"
+            class="btn btn-primary form-control form-control-lg form-control-solid button-bottom"
+            (click)="
+              paymentIdSearch.value = '';
+              keywordSearch.value = '';
+              lessonIdSearch.value = '';
+              studentIdSearch.value = '';
+              payment_type.value = '';
+              status.value = '';
+              paymentStatus.value = '';
+              clearFilter()
+            "
+            >Clear</a
+          >
+        </div>
+        
+        
+        
+      </div>
+      <div class="col-lg-12 row mt-5">
+        
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+      <mat-table #table2 [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="videoName">
+          <mat-header-cell *matHeaderCellDef>Lesson Name </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.videoName }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="studentName">
+          <mat-header-cell *matHeaderCellDef>Student Name </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.student_fname }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="days">
+          <mat-header-cell *matHeaderCellDef>Days </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.days }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="start_date">
+          <mat-header-cell *matHeaderCellDef>Start date </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.start_date }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="end_date">
+          <mat-header-cell *matHeaderCellDef>End Date</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.end_date }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="payment_type">
+          <mat-header-cell *matHeaderCellDef>Payment Type</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.payment_type }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="total_price">
+          <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.total_price }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-chip-list aria-label="">
+              <mat-chip
+                color=""
+                *ngIf="row.status == 'pending'"
+                selected
+                >PENDING</mat-chip
+              >
+              <mat-chip
+                color=""
+                *ngIf="row.status == 'active'"
+                selected
+                >ACTIVE</mat-chip
+              >
+              <mat-chip
+                color="accent"
+                *ngIf="row.status == 'expired'"
+                selected
+                >EXPIRED</mat-chip
+              >
+              <mat-chip
+                color="warn"
+                *ngIf="row.status == 'canceled'"
+                selected
+                >CANCELED</mat-chip
+              >
+            </mat-chip-list>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="payment_status">
+          <mat-header-cell *matHeaderCellDef>Payment Status </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-chip-list aria-label="">
+              <mat-chip
+                color=""
+                *ngIf="row.payment_status == 'pending'"
+                selected
+                >PENDING</mat-chip
+              >
+              <mat-chip
+                color="accent"
+                *ngIf="row.payment_status == 'approved'"
+                selected
+                >APPROVED</mat-chip
+              >
+              <mat-chip
+                color="warn"
+                *ngIf="row.payment_status == 'canceled'"
+                selected
+                >CANCELED</mat-chip
+              >
+            </mat-chip-list>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              [routerLink]="['/lessons-purchase/edit', row.id]"
+              matTooltip="Edit"
+            >
+              <mat-icon>create</mat-icon></button
+            >&nbsp;
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="delete(row.id, row.name)"
+              matTooltip="Delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator
+        [length]="pagination_data.total"
+        [pageSizeOptions]="pagination_item_counts"
+        (page)="pageEvent($event)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

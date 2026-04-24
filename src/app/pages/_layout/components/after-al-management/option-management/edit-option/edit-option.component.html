@@ -1,0 +1,125 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+        <!--begin::Header-->
+        <div class="card-header card-header-tabs-line">
+            <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+                <li class="nav-item">
+                    <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                        Banner Info
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                        Image
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="setActiveTab(3)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(3)" role="tab">
+                        Document
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+    
+        <div class="card-body">
+            <div class="tab-content pt-3">
+                <!-- begin::Header -->
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                    <div [formGroup]="formGroup">
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Video Link</label>
+                            <div class="col-xl-4">
+                                <input class="form-control form-control-lg form-control-solid" type="text" formControlName="video" [class.is-invalid]="isControlInvalid('video')"
+                                    [class.is-valid]="isControlValid('video')" />
+                            </div>
+                            <label class="col-xl-2 col-form-label"> Institute</label>
+                            <div class="col-xl-4">
+                                <select class="form-control form-control-lg form-control-solid" name="after_al_category_id" formControlName="after_al_category_id" [class.is-invalid]="isControlInvalid('after_al_category_id')"
+                                    [class.is-valid]="isControlValid('after_al_category_id')">
+                                    <option *ngFor="let item of categoryObj" [value]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Course</label>
+                            <div class="col-xl-4">
+                                <select class="form-control form-control-lg form-control-solid" name="institute_id" formControlName="institute_id" [class.is-invalid]="isControlInvalid('institute_id')"
+                                    [class.is-valid]="isControlValid('institute_id')">
+                                    <option *ngFor="let item of instituteObj" [value]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <label class="col-xl-2 col-form-label"> Status</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="media" formControlName="status" [class.is-invalid]="isControlInvalid('status')"
+                                [class.is-valid]="isControlValid('status')">
+                                <option value="ACTIVE">Active</option>
+                                <option value="DISABLED">Disabled</option>
+
+                            </select>
+                        </div>
+                        </div>
+    
+                       
+                    <div class="modal-footer">
+                        <ng-container>
+                            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+                        </ng-container>
+                    </div>
+                </div>
+                
+            </div>
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                    <div class="col-lg-6 text-center card mb-4">
+                        <div [formGroup]="formGroup3" class="col-lg-12 text-center mt-4" *ngIf="vidoeResponse">
+                            <h5 class="col-xl-12 col-lg-12 col-form-label">Banner</h5>
+                            <img src="{{STORAGE_BUCKET}}{{vidoeResponse.banner}}" class="teacher-img" alt="">
+                            <div class="form-group row">
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('banner',$event)"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateBanner()" [disabled]="formGroup3.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center card mb-4">
+                        <div [formGroup]="formGroup3" class="col-lg-12 text-center mt-4" *ngIf="vidoeResponse">
+                            <h5 class="col-xl-12 col-lg-12 col-form-label">Thumbnail</h5>
+                            <img src="{{STORAGE_BUCKET}}{{vidoeResponse.thumbnail}}" class="teacher-img" alt="">
+                            <div class="form-group row">
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('thumbnail',$event)"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateThumb()" [disabled]="formGroup4.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+                    <div class="col-lg-12 text-center card mb-4 row">
+                            <ngx-doc-viewer  *ngIf="vidoeResponse && vidoeResponse.pdf_file" url="{{STORAGE_BUCKET}}{{vidoeResponse.pdf_file}}" viewer="google"  style="width:100%;height:80vh;">
+                            </ngx-doc-viewer>
+                            <div [formGroup]="formGroup2" class="col-lg-6 text-center mt-4" *ngIf="vidoeResponse">
+                                <h5 class="col-xl-12 col-lg-12 col-form-label">Update PDF</h5>
+                                <div class="form-group row">
+                                    <div class="col-lg-9 col-xl-9">
+                                        <input class="form-control form-control-lg form-control-solid" type="file" accept=".pdf" (change)="uploadFile('pdf_file',$event)"/>
+                                    </div>
+                                    <div class="col-lg-3 col-xl-3">
+                                        <button type="submit" class="btn btn-primary btn-elevate" (click)="updatePDF()" [disabled]="formGroup2.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                    </div>
+                </div>
+        </div>
+    
+        <!--end::Header-->
+        <!--begin::Form-->
+    </div>
+    <!--end::Card-->

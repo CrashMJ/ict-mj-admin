@@ -1,0 +1,30 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW SETTING</h3>
+            <ng-container>
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Key</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="key" [class.is-invalid]="isControlInvalid('key')"
+                                [class.is-valid]="isControlValid('key')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Value</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="value" [class.is-invalid]="isControlInvalid('value')"
+                                [class.is-valid]="isControlValid('value')" />
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+            <!-- [disabled]="formGroup.invalid" -->
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+        </ng-container>
+    </div>
+</div>

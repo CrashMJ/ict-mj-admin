@@ -1,0 +1,126 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">SLT Subscription Payments</h3>
+        </div>
+    </div>
+    <div class="col-lg-12 ml-5"style="width: 100%">
+        <div class="row mt-2">
+            <div class="col-lg-12">
+                <h4 class="card-label">Filter</h4>
+            </div>
+            <div class="col-lg-12 row">
+                <div class="col-lg-4">
+                </div>
+               
+                <div class="col-lg-3">
+                        <label class="col-form-label">Transaction ID </label>
+                        <input class="form-control form-control-lg form-control-solid" name="id" #transIdSearch type="text" (keyup)="search('transaction_id',transIdSearch.value)" />
+            </div>
+                 <div class="col-lg-3">
+                        <label class="col-form-label">Smart ID </label>
+                        <input class="form-control form-control-lg form-control-solid" name="smart_id" #smartIdSearch type="text" (keyup)="search('smart_id',smartIdSearch.value)" />   
+                </div>
+                 <div class="col-lg-1 ml-1">
+                    <label class="col-form-label"></label>
+                    <a type="button" class="btn  form-control form-control-lg form-control-solid button-bottom" (click)="smartIdSearch.value = '';transIdSearch.value = '';clearFilter()">Clear</a>
+                 </div> 
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <mat-table #table2 [dataSource]="dataSource">
+				
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.id }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="transaction_date">
+                    <mat-header-cell *matHeaderCellDef>Transaction Date</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.transaction_date | date:'short'}}
+                    </mat-cell>
+                </ng-container>
+               
+                <ng-container matColumnDef="transaction_amount">
+                    <mat-header-cell *matHeaderCellDef>Tranasaction Amount </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.transaction_amount }}
+                    </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="smart_id">
+                    <mat-header-cell *matHeaderCellDef>Smart ID</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.smart_id }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="transaction_id">
+                    <mat-header-cell *matHeaderCellDef>Transaction ID</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.transaction_id }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="sucess">
+                        <mat-header-cell *matHeaderCellDef>Success</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.success }}
+                        </mat-cell>
+                    </ng-container>
+                <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.created_at | date:'short'}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="subscription_ID">
+                    <mat-header-cell *matHeaderCellDef>Subscription ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.subscription.id }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button
+                            mat-icon-button
+                            color="primary"
+                            type="button"
+                            [routerLink]="['/slt-subscriptions/edit', row.id]"
+                            matTooltip="Edit"
+                        >
+                            <mat-icon>create</mat-icon></button
+                        >
+                        <!-- &nbsp;
+                        <button
+                            mat-icon-button
+                            color="warn"
+                            type="button"
+                            (click)="delete(row.id,row.transaction_date)"
+                            matTooltip="Delete"
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button> -->
+                    </mat-cell>
+                   
+                </ng-container>
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns"
+                ></mat-header-row>
+                <mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                ></mat-row>
+            </mat-table>
+            <mat-paginator
+            [length]="pagination_data.total"
+            [pageSizeOptions]="pagination_item_counts"
+            (page)="pageEvent($event)"
+            showFirstLastButtons
+        ></mat-paginator>
+        </div>
+       
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Profile
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2  col-form-label">Email</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="email" [class.is-invalid]="isControlInvalid('email')"
+                                [class.is-valid]="isControlValid('email')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Name</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="name" [class.is-invalid]="isControlInvalid('name')"
+                                [class.is-valid]="isControlValid('name')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Address </label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="address" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">Phone Number</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="phone" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">NIC</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="nic" [class.is-invalid]="isControlInvalid('nic')"
+                                [class.is-valid]="isControlValid('nic')" />
+                        </div>
+                        <!-- </div>
+                    <div class="form-group row"> -->
+                        <label class="col-xl-2 col-form-label">Password</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="password" formControlName="password" [class.is-invalid]="isControlInvalid('password')"
+                                [class.is-valid]="isControlValid('password')"  autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Role</label>
+                        <div class="col-xl-4">
+                            <select formControlName="role" class="form-control" [class.is-invalid]="isControlInvalid('role')" [class.is-valid]="isControlValid('role')">
+                                <option value="SUPER_ADMIN">SUPER_ADMIN</option>
+                                <option value="LIVE_ADMIN">LIVE_ADMIN</option>
+                                <option value="VOD_ADMIN">VOD_ADMIN</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="cancel()">Cancel</button>
+                    <ng-container>
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Save</button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

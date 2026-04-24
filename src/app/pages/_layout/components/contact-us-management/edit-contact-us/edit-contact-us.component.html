@@ -1,0 +1,28 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Contact Info
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <h6>Name: {{contactUsResponse.name}}</h6>
+                <h6>Phone: {{contactUsResponse.phone}}</h6>
+                <h6>Email: {{contactUsResponse.email}}</h6>
+                <h6>Message: {{contactUsResponse.message}}</h6>
+                <hr>
+                <h6>Created: {{contactUsResponse.created_at}}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Card-->

@@ -1,0 +1,83 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <!-- <h3  >Students List</h3> -->
+
+            <h3 class="card-label">ADD NEW WEEKLY QUIZ</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <ng-container>
+            <!-- <ng-container >Edit</ng-container>
+          <ng-container >Create</ng-container>
+          customer -->
+            <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+            <div [formGroup]="formGroup">
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Question</label>
+                    <div class="col-lg-11 col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="text" formControlName="question" [class.is-invalid]="isControlInvalid('question')"
+                            [class.is-valid]="isControlValid('question')" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-xl-3  col-form-label">Answer 1 (Correct Answer)</label>
+                    <div class="col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="text" formControlName="answer1" [class.is-invalid]="isControlInvalid('answer1')"
+                            [class.is-valid]="isControlValid('answer1')" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Answer 2</label>
+                    <div class="col-lg-11 col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="text" formControlName="answer2" [class.is-invalid]="isControlInvalid('answer2')"
+                            [class.is-valid]="isControlValid('answer2')" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Answer 3</label>
+                    <div class="col-lg-11 col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="text" formControlName="answer3" [class.is-invalid]="isControlInvalid('answer3')"
+                            [class.is-valid]="isControlValid('answer3')" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Answer 4 </label>
+                    <div class="col-lg-11 col-xl-9 ">
+                        <input class="form-control form-control-lg form-control-solid" type="text" formControlName="answer4" [class.is-invalid]="isControlInvalid('answer4')"
+                            [class.is-valid]="isControlValid('answer4')" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Sponsor Banner</label>
+                    <div class="col-lg-11 col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('sponsor_banner',$event)"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Sponsor Logo</label>
+                    <div class="col-lg-11 col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('sponsor_logo',$event)" accept=".png, .jpg, .jpeg"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Redirect Url</label>
+                    <div class="col-lg-11 col-xl-9">
+                        <input class="form-control form-control-lg form-control-solid" type="text" formControlName="redirectUrl" [class.is-invalid]="isControlInvalid('redirectUrl')"
+                            [class.is-valid]="isControlValid('redirectUrl')" />
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+            <ng-container>
+
+                <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Save</button>
+            </ng-container>
+        </div>
+
+    </div>

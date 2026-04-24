@@ -1,0 +1,180 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">API Logs List</h3>
+    </div>
+  </div>
+  <div class="col-lg-12 ml-5" style="width: 100%">
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <h4 class="card-label">Filter</h4>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-2 mb-3">
+          <label class="col-form-label">User Id</label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="userId"
+            #userId
+            type="text"
+            (keyup)="search('userId', userId.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">User Name</label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="userName"
+            #userName
+            type="text"
+            (keyup)="search('userName', userName.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Response Code</label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="responseCode"
+            #responseCode
+            type="text"
+            (keyup)="search('responseCode', responseCode.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Requester Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="requesterId"
+            #requesterId
+            type="text"
+            (keyup)="search('requesterId', requesterId.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Request Param Id </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="requestParamId"
+            #requestParamId
+            type="text"
+            (keyup)="search('requestParamId', requestParamId.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Requester Email </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="requesterEmail"
+            #requesterEmail
+            type="text"
+            (keyup)="search('requesterEmail', requesterEmail.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Role </label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="requesterRole"
+            #requesterRole
+            type="text"
+            (change)="search('requesterRole', requesterRole.value)"
+          >
+            <option value=""></option>
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
+            <option value="student/admin">Student/Admin</option>
+            <option value="open">Open</option>
+          </select>
+        </div>
+        <div class="col-lg-1 mt-5">
+          <label class="col-form-label"></label>
+          <a
+            type="button"
+            class="btn btn-dark form-control form-control-lg form-control-solid button-bottom"
+            (click)="
+              userId.value = '';
+              userName.value = '';
+              requesterRole.value = '';
+              requesterEmail.value = '';
+              responseCode.value = '';
+              requesterId.value = '';
+              requestParamId.value = '';
+              clearFilter()
+            "
+            >Clear</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+      <mat-table #table2 [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="endPoint">
+          <mat-header-cell *matHeaderCellDef>EndPoint </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.endPoint }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="requesterRole">
+          <mat-header-cell *matHeaderCellDef>Role </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.requesterRole }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="studentName">
+          <mat-header-cell *matHeaderCellDef>Student Name</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.user_fname }} {{ row.user_lname }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="requesterEmail">
+          <mat-header-cell *matHeaderCellDef>Requester Email </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.requesterEmail }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="responseCode">
+          <mat-header-cell *matHeaderCellDef>Response Code </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.responseCode }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+          <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.created_at }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              [routerLink]="['/api-log/edit', row.id]"
+              matTooltip="Edit"
+            >
+              <mat-icon>create</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator
+        [length]="pagination_data.total"
+        [pageSizeOptions]="pagination_item_counts"
+        (page)="pageEvent($event)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,394 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Class Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                   Time Slot(s)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(3)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(3)" role="tab">
+                   Image
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(4)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(4)" role="tab">
+                    Tute
+                </a>
+            </li>
+            <li
+            class="nav-item">
+            <a
+              (click)="setActiveTab(5)"
+              class="nav-link cursor-pointer"
+              [ngClass]="getActiveTabCSSClass(5)"
+              role="tab"
+            >
+              Teacher Details
+            </a>
+          </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(6)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(6)" role="tab">
+                    Enrollments
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(7)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(7)" role="tab">
+                    Class Summery
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Topic</label>
+                        <div class="col-lg-10">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="topic" [class.is-invalid]="isControlInvalid('topic')"
+                                [class.is-valid]="isControlValid('topic')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Description</label>
+                        <div class="col-lg-10">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="description" [class.is-invalid]="isControlInvalid('description')"
+                                [class.is-valid]="isControlValid('description')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label"> Type</label>
+                        <div class="col-lg-4">
+                            <select class="form-control form-control-lg form-control-solid" name="type" formControlName="type" [class.is-invalid]="isControlInvalid('type')"
+                                [class.is-valid]="isControlValid('type')">
+                                <option value="DAY">DAY</option>
+                                <option value="FREE">FREE</option>
+                                <option value="MONTHLY">MONTHLY</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Fee</label>
+                        <div class="col-lg-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="fee" [class.is-invalid]="isControlInvalid('fee')"
+                                [class.is-valid]="isControlValid('fee')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">video_url</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="video_url" [class.is-invalid]="isControlInvalid('video_url')"
+                                [class.is-valid]="isControlValid('video_url')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">vod_code</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="vod_code" [class.is-invalid]="isControlInvalid('vod_code')"
+                                [class.is-valid]="isControlValid('vod_code')" />
+                        </div>
+                    </div>
+                        <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">free_code</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="free_code" [class.is-invalid]="isControlInvalid('free_code')"
+                                [class.is-valid]="isControlValid('free_code')" />
+                        </div>
+                        <label class="col-xl-2 col-form-label">zoom_meeting_id</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="zoom_meeting_id" [class.is-invalid]="isControlInvalid('zoom_meeting_id')"
+                                [class.is-valid]="isControlValid('zoom_meeting_id')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                       
+                        <label class="col-xl-2 col-form-label">Is Zoom Meeting Live</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="status" formControlName="zoom_meeting_live" [class.is-invalid]="isControlInvalid('zoom_meeting_live')"
+                                [class.is-valid]="isControlValid('zoom_meeting_live')">
+                                <option value=true>ACTIVE</option>
+                                <option value=false>PENDING</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2 col-form-label">Status</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="status" formControlName="status" [class.is-invalid]="isControlInvalid('status')"
+                                [class.is-valid]="isControlValid('status')">
+                                <option value="APPROVED">APPROVED</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="REJECTED">REJECTED</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label"> Class Location</label>
+                        <div class="col-lg-4">
+                            <select class="form-control form-control-lg form-control-solid" name="studio_class" formControlName="studio_class" [class.is-invalid]="isControlInvalid('studio_class')"
+                                [class.is-valid]="isControlValid('studio_class')">
+                                <option value=true>Studio</option>
+                                <option value=false>Teacher's Place</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                <div class="form-group row" *ngFor="let classDate of classDates; let i = index">
+                    <label class="col-xl-1 col-form-label">Date</label>
+                    <div class="col-lg-2">
+                        <input class="form-control form-control-lg form-control-solid" type="date" #date [value]=classDate.date />
+                    </div>
+                    <label class="col-xl-1 col-form-label">Start Time</label>
+                    <div class="col-lg-2">
+                        <input class="form-control form-control-lg form-control-solid" #stime type="time" value={{classDate.stime}} />
+                    </div>
+                    <label class="col-xl-1 col-form-label">End Time</label>
+                    <div class="col-lg-2">
+                        <input class="form-control form-control-lg form-control-solid"  #etime type="time"  value={{classDate.etime}} />
+                    </div>
+                    <div class="col-lg-3 col-xl-3">
+                        <button class="btn btn-danger btn-elevate" (click)="removeTimeSlot(i)" >Remove</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-1 col-form-label">Date</label>
+                    <div class="col-lg-2">
+                        <input class="form-control form-control-lg form-control-solid" type="date" #date (change)="addTimeSlotItem('date', date.value)" [value]=timeSlotDump.date/>
+                    </div>
+                    <label class="col-xl-1 col-form-label">Start Time</label>
+                    <div class="col-lg-2">
+                        <input class="form-control form-control-lg form-control-solid" (change)="addTimeSlotItem('stime', stime.value)" #stime type="time" [value]=timeSlotDump.stime />
+                    </div>
+                    <label class="col-xl-1 col-form-label">End Time</label>
+                    <div class="col-lg-2">
+                        <input class="form-control form-control-lg form-control-solid" (change)="addTimeSlotItem('etime', etime.value)" #etime type="time"  [value]=timeSlotDump.etime/>
+                    </div>
+                    <div class="col-lg-3 col-xl-3">
+                        <button class="btn btn-primary btn-elevate" (click)="addTimeSlot()" >Add</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button  class="btn btn-primary btn-elevate" (click)="saveTime()">Save</button>
+                    </ng-container>
+                </div>
+            </div>
+          
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+                <div class="col-lg-6 text-center card mb-4">
+                    <div [formGroup]="formGroup3" class="col-lg-12 text-center mt-4" *ngIf="vidoeResponse">
+                        <h5 class="col-xl-12 col-lg-12 col-form-label">Thumbnail</h5>
+                        <img src="{{STORAGE_BUCKET}}{{vidoeResponse.video_thumbnail}}" class="teacher-img" alt="">
+                        <div class="form-group row">
+                            <div class="col-lg-9 col-xl-9">
+                                <input class="form-control form-control-lg form-control-solid" type="file" accept=".png, .jpg, .jpeg" (change)="uploadFile('video_thumbnail',$event)"/>
+                            </div>
+                            <div class="col-lg-3 col-xl-3">
+                                <button type="submit" class="btn btn-primary btn-elevate" (click)="updateThumb()" [disabled]="formGroup3.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+                <div class="col-lg-12 text-center card mb-4 row">
+                        <ngx-doc-viewer  *ngIf="vidoeResponse && vidoeResponse.tute" url="{{STORAGE_BUCKET}}{{vidoeResponse.tute}}" viewer="google"  style="width:100%;height:80vh;">
+                        </ngx-doc-viewer>
+                        <div [formGroup]="formGroup2" class="col-lg-6 text-center mt-4" *ngIf="vidoeResponse">
+                            <h5 class="col-xl-12 col-lg-12 col-form-label">Update Tute</h5>
+                            <div class="form-group row">
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" accept=".pdf" (change)="uploadFile('tute',$event)"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateTute()" [disabled]="formGroup2.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                     
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+                <div class="row" *ngIf="vidoeResponse">
+                  <div class="col-lg-12 mb-4">
+                    <div class="col-lg-12 row mb-4">
+                      <div class="col-lg-6 row">
+                        <div class="col-lg-6">
+                          ID<br/>
+                          Name<br/>
+                          Phone<br/>
+                          Email<br/>
+                          NIC<br/>
+                      </div>
+                      <div class="col-lg-6">
+                          {{vidoeResponse.teacher.id}}<br/>
+                          {{vidoeResponse.teacher.name}}<br/>
+                          {{vidoeResponse.teacher.phone}}<br/>
+                          {{vidoeResponse.teacher.email}}<br/>
+                          {{vidoeResponse.teacher.nic}}<br/>
+                      </div>
+                      </div>
+                    
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(6)">
+                <div class="mat-elevation-z8">
+                    <mat-table #table2 [dataSource]="dataSource2">
+				
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="live_class_id">
+                            <mat-header-cell *matHeaderCellDef>Class ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.live_class.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="live_class">
+                            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.live_class.topic }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="type">
+                            <mat-header-cell *matHeaderCellDef>Type </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.type }}
+                            </mat-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-chip-list aria-label="">
+                                    <mat-chip color="accent" *ngIf="row.status == 'PURCHASE'" selected>PURCHASE</mat-chip>
+                                    <mat-chip color="warn" *ngIf="row.status == 'FREE_CARD'" selected>FREE_CARD</mat-chip>
+                                </mat-chip-list>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="student_id">
+                            <mat-header-cell *matHeaderCellDef>Student ID </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.id }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.name }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student.phone }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="student_in_class">
+                            <mat-header-cell *matHeaderCellDef>Student In</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.student_in_class }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="created_at">
+                            <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                {{ row.updated_at }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <button
+                                    mat-icon-button
+                                    color="primary"
+                                    type="button"
+                                    [routerLink]="['/live-enrollments/edit', row.id]"
+                                    matTooltip="Edit"
+                                >
+                                    <mat-icon>create</mat-icon></button
+                                >
+                            </mat-cell>
+                           
+                        </ng-container>
+                        <mat-header-row
+                            *matHeaderRowDef="displayedColumns2"
+                        ></mat-header-row>
+                        <mat-row
+                            *matRowDef="let row; columns: displayedColumns2"
+                        ></mat-row>
+                    </mat-table>
+                    <mat-paginator
+                        [length]="pagination_data2.total"
+                        [pageSizeOptions]="pagination_item_counts2"
+                        (page)="pageEvent2($event)"
+                        showFirstLastButtons
+                    ></mat-paginator>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(7)">
+                <div class="mat-elevation-z8" *ngIf="vidoeResponse && vidoeResponse.classSummery">
+                    <div class="col-lg-12 row pt-5 pb-5 pl-5 pr-5">
+                        <div class="col-lg-4 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>Total Enrollments</h5>
+                            <h3>{{vidoeResponse.classSummery.totalFreeCards + vidoeResponse.classSummery.totalPurchases}}</h3>
+                        </div>
+                        <div class="col-lg-4 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>Total Paid Students</h5>
+                            <h3>{{vidoeResponse.classSummery.totalPurchases}}</h3>
+                        </div> 
+                        <div class="col-lg-4 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>Total Free Cards</h5>
+                            <h3>{{vidoeResponse.classSummery.totalFreeCards}}</h3>
+                        </div>
+                        <!--  -->
+
+                    </div>
+                    <div class="col-lg-12 row pt-5 pb-5 pl-5 pr-5">
+                        <div class="col-lg-4 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>Total Payments</h5>
+                            <h3>{{vidoeResponse.classSummery.totalPayments}}</h3>
+                        </div>
+                        <div class="col-lg-4 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>For Teacher</h5>
+                            <h3>{{vidoeResponse.classSummery.totalTeacherPay}}</h3>
+                        </div> 
+                        <div class="col-lg-4 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>For Crayons</h5>
+                            <h3>{{vidoeResponse.classSummery.totalCrayonsPay}}</h3>
+                        </div>
+                        <div class="col-lg-6 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>For SLT</h5>
+                            <h3>{{vidoeResponse.classSummery.totalSltPay}}</h3>
+                        </div> 
+                        <div class="col-lg-6 card pt-5 pb-5 pl-5 pr-5 mb-5">
+                            <h5>For IPG</h5>
+                            <h3>{{vidoeResponse.classSummery.totalIpgPay}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

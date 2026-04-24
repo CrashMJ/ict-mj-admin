@@ -1,0 +1,107 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW CLASS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            <ng-container>
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Topic</label>
+                        <div class="col-lg-10">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="topic" [class.is-invalid]="isControlInvalid('topic')"
+                                [class.is-valid]="isControlValid('topic')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Description</label>
+                        <div class="col-lg-10">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="description" [class.is-invalid]="isControlInvalid('description')"
+                                [class.is-valid]="isControlValid('description')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-1 col-form-label"> Type</label>
+                        <div class="col-lg-5">
+                            <select class="form-control form-control-lg form-control-solid" name="type" formControlName="type" [class.is-invalid]="isControlInvalid('type')"
+                                [class.is-valid]="isControlValid('type')">
+                                <option value="DAY">DAY</option>
+                                <option value="FREE">FREE</option>
+                                <option value="MONTHLY">MONTHLY</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-1 col-form-label">Fee</label>
+                        <div class="col-lg-5">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="fee" [class.is-invalid]="isControlInvalid('fee')"
+                                [class.is-valid]="isControlValid('fee')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-1 col-form-label"> Class Location</label>
+                        <div class="col-lg-5">
+                            <select class="form-control form-control-lg form-control-solid" name="studio_class" formControlName="studio_class" [class.is-invalid]="isControlInvalid('studio_class')"
+                                [class.is-valid]="isControlValid('studio_class')">
+                                <option value=true>Studio</option>
+                                <option value=false>Teacher's Place</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-1 col-form-label">Teacher</label>
+                        <div class="col-lg-5">
+                            <select formControlName="teacher" class="form-control"
+                                [class.is-invalid]="isControlInvalid('teacher')"
+                                [class.is-valid]="isControlValid('teacher')">
+                                <option disabled>Teacher</option>
+                                <option value="{{teacher.id}}" *ngFor="let teacher of teacherObj">{{teacher.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group row" *ngFor="let classDate of classDates; let i = index">
+                          
+                            <div class="col-lg-4">
+                                <label class="col-xl-12 col-form-label">Date</label>
+                                <input class="col-xl-12 form-control form-control-lg form-control-solid" type="date" #date [value]=classDate.date />
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="col-xl-12 col-form-label">Start</label>
+                                <input class="col-xl-12 form-control form-control-lg form-control-solid" #stime type="time" value={{classDate.stime}} />
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="col-xl-12 col-form-label">End</label>
+                                <input class="col-xl-12 form-control form-control-lg form-control-solid"  #etime type="time"  value={{classDate.etime}} />
+                            </div>
+                            <div class="col-lg-2 col-xl-2">
+                                <label class="col-xl-12 col-form-label">&nbsp;</label>
+                                <button class="col-xl-12 btn btn-danger btn-elevate" (click)="removeTimeSlot(i)" >Remove</button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <!-- <label class="col-xl-1 col-form-label">Date</label> -->
+                            <div class="col-lg-4">
+                                <label class="col-xl-12 col-form-label">Date</label>
+                                <input class="col-xl-12 form-control form-control-lg form-control-solid" type="date" #date (change)="addTimeSlotItem('date', date.value)" [value]=timeSlotDump.date/>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="col-xl-12 col-form-label">Start</label>
+                                <input class="col-xl-12 form-control form-control-lg form-control-solid" (change)="addTimeSlotItem('stime', stime.value)" #stime type="time" [value]=timeSlotDump.stime />
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="col-xl-12 col-form-label">End</label>
+                                <input class="col-xl-12 form-control form-control-lg form-control-solid" (change)="addTimeSlotItem('etime', etime.value)" #etime type="time" [value]=timeSlotDump.etime/>
+                            </div>
+                            <div class="col-lg-2 col-xl-2">
+                                <label class="col-xl-12 col-form-label">&nbsp;</label>
+                                <button class="col-xl-12 btn btn-primary btn-elevate" (click)="addTimeSlot()" >Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+            <!-- [disabled]="formGroup.invalid" -->
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+        </ng-container>
+    </div>
+</div>

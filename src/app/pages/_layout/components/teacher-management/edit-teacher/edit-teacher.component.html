@@ -1,0 +1,895 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Images
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(3)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(3)"
+          role="tab"
+        >
+          Videos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(4)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(4)"
+          role="tab"
+        >
+          Purchases
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(5)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(5)"
+          role="tab"
+        >
+          Subscriptions
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(6)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(6)"
+          role="tab"
+        >
+          Reset Password
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(7)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(7)"
+          role="tab"
+        >
+          Summary
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div [formGroup]="formGroup" class="col-lg-6 col-lg-offset-3 card pt-3">
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="name"
+                [class.is-invalid]="isControlInvalid('name')"
+                [class.is-valid]="isControlValid('name')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Email</label>
+            <div class="col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                disabled
+                type="text"
+                formControlName="email"
+                [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Address </label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="address"
+                [class.is-invalid]="isControlInvalid('address')"
+                [class.is-valid]="isControlValid('address')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">NIC</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="nic"
+                [class.is-invalid]="isControlInvalid('nic')"
+                [class.is-valid]="isControlValid('nic')"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Phone Number</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="phone"
+                [class.is-invalid]="isControlInvalid('phone')"
+                [class.is-valid]="isControlValid('phone')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="city"
+                [class.is-invalid]="isControlInvalid('city')"
+                [class.is-valid]="isControlValid('city')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">District</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control"
+                formControlName="district"
+                required
+                placeholder="Select District"
+                [class.is-invalid]="isControlInvalid('district')"
+                [class.is-valid]="isControlValid('district')"
+              >
+                <option value="">Select</option>
+                <option
+                  value="Table"
+                  *ngFor="let district of districts"
+                  value="{{ district.name_en }}"
+                >
+                  {{ district.name_en }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Subject</label>
+            <div class="col-lg-9">
+              <select
+                formControlName="subject"
+                class="form-control"
+                [class.is-invalid]="isControlInvalid('subject')"
+                [class.is-valid]="isControlValid('subject')"
+              >
+                <option disabled>Subjects</option>
+                <option
+                  value="{{ subject.id }}"
+                  *ngFor="let subject of subjectObj"
+                >
+                  {{ subject.title }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Subscription Monthly Price</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="subscription_price"
+                [class.is-invalid]="isControlInvalid('subscription_price')"
+                [class.is-valid]="isControlValid('subscription_price')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Status</label>
+            <div class="col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="status"
+                formControlName="status"
+                [class.is-invalid]="isControlInvalid('status')"
+                [class.is-valid]="isControlValid('status')"
+              >
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="BLOCKED">BLOCKED</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row pl-3 modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary btn-elevate"
+              (click)="save()"
+              [disabled]="formGroup.invalid"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <div class="col-lg-6 text-center card mb-4">
+          <div
+            [formGroup]="formGroup31"
+            class="col-lg-12 text-center mt-4"
+            *ngIf="teacherResponse"
+          >
+            <h5 class="col-xl-12 col-lg-12 col-form-label">Profile Picture</h5>
+            <img
+              src="{{ STORAGE_BUCKET }}{{ teacherResponse.profile }}"
+              class="teacher-img"
+              alt=""
+            />
+            <div class="form-group row">
+              <div class="col-lg-9 col-xl-9">
+                <input
+                  class="form-control form-control-lg form-control-solid"
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  (change)="uploadFile('profile_image', $event)"
+                />
+              </div>
+              <div class="col-lg-3 col-xl-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-elevate"
+                  (click)="updateProfileBanner()"
+                  [disabled]="formGroup31.invalid"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center card mb-4">
+          <div
+            [formGroup]="formGroup32"
+            class="col-lg-12 text-center mt-4"
+            *ngIf="teacherResponse"
+          >
+            <h5 class="col-xl-12 col-lg-12 col-form-label">Desktop Banner</h5>
+            <img
+              src="{{ STORAGE_BUCKET }}{{ teacherResponse.banner }}"
+              class="teacher-img"
+              alt=""
+            />
+            <div class="form-group row">
+              <div class="col-lg-9 col-xl-9">
+                <input
+                  class="form-control form-control-lg form-control-solid"
+                  type="file"
+                  (change)="uploadFile('banner_image', $event)"
+                  accept=".png, .jpg, .jpeg"
+                />
+              </div>
+              <div class="col-lg-3 col-xl-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-elevate"
+                  (click)="updateDesktopBanner()"
+                  [disabled]="formGroup32.invalid"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center card mb-4">
+          <div
+            [formGroup]="formGroup33"
+            class="col-lg-12 text-center mt-4"
+            *ngIf="teacherResponse"
+          >
+            <h5 class="col-xl-12 col-lg-12 col-form-label">Mobile Banner</h5>
+            <img
+              src="{{ STORAGE_BUCKET }}{{ teacherResponse.mobile_banner }}"
+              class="teacher-img"
+              alt=""
+            />
+            <div class="form-group row">
+              <div class="col-lg-9 col-xl-9">
+                <input
+                  class="form-control form-control-lg form-control-solid"
+                  type="file"
+                  (change)="uploadFile('mobile_banner_image', $event)"
+                  accept=".png, .jpg, .jpeg"
+                />
+              </div>
+              <div class="col-lg-3 col-xl-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-elevate"
+                  (click)="updateMobileBanner()"
+                  [disabled]="formGroup33.invalid"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+        <div class="mat-elevation-z8">
+          <mat-table #table1 [dataSource]="dataSource1">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_code">
+              <mat-header-cell *matHeaderCellDef>Code </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video_code }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef>Title </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.title }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="medium">
+              <mat-header-cell *matHeaderCellDef>Medium </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.medium }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef>Price </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.price }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="grade">
+              <mat-header-cell *matHeaderCellDef>Grade </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.grade }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-chip-list aria-label="">
+                  <mat-chip
+                    color="accent"
+                    *ngIf="row.status == 'ACTIVE'"
+                    selected
+                    >Active</mat-chip
+                  >
+                  <mat-chip
+                    color="warn"
+                    *ngIf="row.status == 'DISABLED'"
+                    selected
+                    >Disabled</mat-chip
+                  >
+                </mat-chip-list>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  [routerLink]="['/video/edit/', row.id]"
+                  matTooltip="Edit"
+                >
+                  <mat-icon>create</mat-icon></button
+                >&nbsp;
+                <!-- <button
+                                        mat-icon-button
+                                        color="warn"
+                                        type="button"
+                                        (click)="delete(row.id,row.id)"
+                                        matTooltip="Delete"
+                                    >
+                                        <mat-icon>delete</mat-icon>
+                                    </button> -->
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns1"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data1.total"
+            [pageSizeOptions]="pagination_item_counts1"
+            (page)="pageEvent1($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+        <div class="mat-elevation-z8">
+          <mat-table #table2 [dataSource]="dataSource2">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_id">
+              <mat-header-cell *matHeaderCellDef>Video ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_price">
+              <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video_price }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_code">
+              <mat-header-cell *matHeaderCellDef>video_code </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video.video_code }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="student_id">
+              <mat-header-cell *matHeaderCellDef>Student ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.name }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.email }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+              <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.phone }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-chip-list aria-label="">
+                  <mat-chip color="" *ngIf="row.status == 'PENDING'" selected
+                    >PENDING</mat-chip
+                  >
+                  <mat-chip
+                    color="accent"
+                    *ngIf="row.status == 'APPROVED'"
+                    selected
+                    >APPROVED</mat-chip
+                  >
+                  <mat-chip
+                    color="warn"
+                    *ngIf="row.status == 'REJECTED'"
+                    selected
+                    >REJECTED</mat-chip
+                  >
+                  <mat-chip
+                    color="warn"
+                    *ngIf="row.status == 'CANCELED'"
+                    selected
+                    >CANCELED</mat-chip
+                  >
+                </mat-chip-list>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.created_at }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  [routerLink]="['/vod-enrollments/edit', row.id]"
+                  matTooltip="Edit"
+                >
+                  <mat-icon>create</mat-icon></button
+                >&nbsp;
+                <!-- <button
+                                    mat-icon-button
+                                    color="warn"
+                                    type="button"
+                                    (click)="delete(row.id,row.name)"
+                                    matTooltip="Delete"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                </button> -->
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns2"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data2.total"
+            [pageSizeOptions]="pagination_item_counts2"
+            (page)="pageEvent2($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+        <div class="mat-elevation-z8">
+          <mat-table #table2 [dataSource]="dataSource3">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Student Name </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.name }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+              <mat-header-cell *matHeaderCellDef
+                >Student Phone
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.phone }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="teachername">
+              <mat-header-cell *matHeaderCellDef>Teacher Name </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.teacher.name }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="teacherphone">
+              <mat-header-cell *matHeaderCellDef
+                >Teacher Phone
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.teacher.phone }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="recurring_amount">
+              <mat-header-cell *matHeaderCellDef>Rec. Amount </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.recurring_amount }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="payment_method">
+              <mat-header-cell *matHeaderCellDef>Method</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.payment_method }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="amount">
+              <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.amount }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-chip-list aria-label="">
+                  <mat-chip color="" *ngIf="row.status == 'PENDING'" selected
+                    >PENDING</mat-chip
+                  >
+                  <mat-chip
+                    color="accent"
+                    *ngIf="row.status == 'APPROVED'"
+                    selected
+                    >APPROVED</mat-chip
+                  >
+                  <mat-chip
+                    color="warn"
+                    *ngIf="row.status == 'REJECTED'"
+                    selected
+                    >REJECTED</mat-chip
+                  >
+                  <mat-chip
+                    color="warn"
+                    *ngIf="row.status == 'CANCELED'"
+                    selected
+                    >CANCELED</mat-chip
+                  >
+                </mat-chip-list>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.created_at }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  [routerLink]="['/vod-subscriptions/edit', row.id]"
+                  matTooltip="Edit"
+                >
+                  <mat-icon>create</mat-icon></button
+                >&nbsp;
+                <!-- <button
+                                    mat-icon-button
+                                    color="warn"
+                                    type="button"
+                                    (click)="delete(row.id,row.name)"
+                                    matTooltip="Delete"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                </button> -->
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns3"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns3"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data3.total"
+            [pageSizeOptions]="pagination_item_counts3"
+            (page)="pageEvent3($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(6)">
+        <div
+          [formGroup]="formGroup2"
+          class="col-lg-6 col-lg-offset-3 card pt-3"
+        >
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
+            <div class="col-lg-6 col-xl-6">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="password"
+                formControlName="password"
+              />
+            </div>
+            <div class="col-lg-3 col-xl-3">
+              <button
+                type="submit"
+                class="btn btn-primary btn-elevate"
+                (click)="updatePassword()"
+                [disabled]="formGroup2.invalid"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(7)">
+        <!-- <app-total-amounts-text></app-total-amounts-text> -->
+        <div class="card card-custom gutter-b">
+          <div [formGroup]="dashboardFormGroup">
+            <div class="row m-2">
+              <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>From</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="fromDate"
+                    [max]="maxDate"
+                    formControlName="fromDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="fromDate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <fieldset>
+                  <mat-form-field appearance="outline">
+                    <mat-label>To</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="toDate"
+                      formControlName="toDate"
+                      [max]="maxDate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="toDate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #toDate></mat-datepicker>
+                  </mat-form-field>
+                </fieldset>
+              </div>
+              <div class="col-lg-3 pt-4">
+                <button
+                  class="btn btn-primary"
+                  [ngClass]="{ dateBtnClicked: todaycolor }"
+                  mat-raised-button
+                  (click)="filterClick()"
+                >
+                  Apply Filter
+                </button>
+              </div>
+              <div class="col-lg-3">
+                <!-- <app-total-registration [title]="heading4" [amount]="subheading"></app-total-registration> -->
+              </div>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-lg-3">
+                <button
+                  class="dateBtn"
+                  [ngClass]="{ dateBtnClicked: todaycolor }"
+                  mat-raised-button
+                  (click)="todayClick()"
+                >
+                  Today
+                </button>
+              </div>
+              <div class="col-lg-3">
+                <button
+                  class="dateBtn"
+                  [ngClass]="{ dateBtnClicked: yesterdatColor }"
+                  mat-raised-button
+                  (click)="yesterdayClick()"
+                >
+                  Yesterday
+                </button>
+              </div>
+              <div class="col-lg-3">
+                <button
+                  class="dateBtn"
+                  [ngClass]="{ dateBtnClicked: sevenDayColor }"
+                  mat-raised-button
+                  (click)="last7DaysClick()"
+                >
+                  Last 7 days
+                </button>
+              </div>
+              <div class="col-lg-3">
+                <button
+                  class="dateBtn"
+                  [ngClass]="{ dateBtnClicked: thirtyDayColor }"
+                  mat-raised-button
+                  (click)="last30DaysClick()"
+                >
+                  Last 30 days
+                </button>
+              </div>
+            </div>
+
+            <div class="row m-10">
+              <!-- <div class="col-lg-3">
+        <app-total-registration
+          [title]="heading4"
+          [amount]="contentObject"
+        ></app-total-registration>
+      </div> -->
+              <div class="col-lg-12">
+                <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                  <div class="card-header border-0 bg-danger py-5">
+                    <h3 class="card-title font-weight-bolder text-white">Summary</h3>
+                    <div class="card-toolbar"></div>
+                  </div>
+
+                  <div
+                    class="card-body p-0 position-relative overflow-hidden"
+                    *ngIf="contentObject"
+                  >
+                    <div class="row m-0">
+                      <div
+                        class="col bg-light-warning px-6 py-8 rounded-xl mb-3 mr-3 ml-5 mt-3"
+                      >
+                        <p class="total-summary-title">
+                          Total single video purchases:
+                        </p>
+                        <p class="total-summary-amount">
+                          {{ contentObject.total_single_video_purchases }}
+                        </p>
+                      </div>
+                      <div
+                        class="col bg-light-primary px-6 py-8 rounded-xl mb-3 mr-3 ml-5 mt-3"
+                      >
+                        <p class="total-summary-title">
+                          Total single video profit:
+                        </p>
+                        <p class="total-summary-amount">
+                          {{ contentObject.total_single_video_profit }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="card-body p-0 position-relative overflow-hidden"
+                    *ngIf="contentObject"
+                  >
+                    <div class="row m-0">
+                      <div
+                        class="col bg-light-success px-6 py-8 rounded-xl mb-3 mr-3 ml-5 mt-3"
+                      >
+                        <p class="total-summary-title">
+                          Total subscription count:
+                        </p>
+                        <p class="total-summary-amount">
+                          {{ contentObject.total_subscription_count }}
+                        </p>
+                      </div>
+                      <div
+                        class="col bg-light-primary px-6 py-8 rounded-xl mb-3 mr-3 ml-5 mt-3"
+                      >
+                        <p class="total-summary-title">
+                          Total subscription profit:
+                        </p>
+                        <p class="total-summary-amount">
+                          {{ contentObject.total_subscription_profit }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-lg-3">
+        <app-total-registration
+          [title]="heading4"
+          [amount]="contentObject"
+        ></app-total-registration>
+      </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

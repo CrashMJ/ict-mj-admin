@@ -1,0 +1,734 @@
+<!--begin::Brand-->
+<div class="brand flex-column-auto" id="kt_brand" [ngClass]="brandClasses">
+  <!--begin::Logo-->
+  <a routerLink="/" class="brand-logo">
+    <img alt="Logo" style="width: 50px !important" [attr.src]="headerLogo" />
+  </a>
+  <!--end::Logo-->
+
+  <ng-container *ngIf="asideSelfMinimizeToggle">
+    <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+      <span
+        [inlineSVG]="
+          './assets/media/svg/icons/Navigation/Angle-double-left.svg'
+        "
+        cacheSVG="true"
+        class="svg-icon svg-icon-xl"
+      ></span>
+    </button>
+  </ng-container>
+</div>
+<!--end::Brand-->
+<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+  <ng-container *ngIf="disableAsideSelfDisplay">
+    <a routerLink="/">
+      <img alt="Logo" style="width: 50px !important" [attr.src]="headerLogo" />
+    </a>
+  </ng-container>
+
+  <div
+    id="kt_aside_menu"
+    class="aside-menu"
+    [ngClass]="asideMenuCSSClasses"
+    data-menu-vertical="1"
+    [attr.data-menu-scroll]="asideMenuScroll"
+    [attr.data-menu-dropdown]="asideMenuDropdown"
+    data-menu-dropdown-timeout="500"
+  >
+    <ul class="menu-nav" [ngClass]="ulCSSClasses">
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Devices/Display1.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Dashboard</span>
+        </a>
+      </li>
+      <li class="menu-section">
+        <h4 class="menu-text">Reports</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="report/student-registration/"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-line2.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Student Registration</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/report/lesson-payments"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Dollar.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Lesson Payments</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/report/class-payments"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Dollar.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Class Payments</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/report/income-vod-video"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-pie.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Class Wise Payments</span>
+        </a>
+      </li>
+      <!-- <li
+      class="menu-item"
+      aria-haspopup="true"
+      routerLinkActive="menu-item-active"
+    >
+      <a
+        class="menu-link"
+        routerLink="/report/income-vod-subscription"
+        routerLinkActive="active"
+      >
+        <span
+          [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-pie.svg'"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text">Income VOD Subscriptions</span>
+      </a>
+    </li> -->
+      <!-- <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/report/profit-vod"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Calculator.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Profit VOD</span>
+        </a>
+      </li> -->
+      <!-- <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/report/income-live"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-pie.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Income Live</span>
+        </a>
+      </li> -->
+      <!-- <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/report/profit-live"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Calculator.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Profit Live</span>
+        </a>
+      </li> -->
+      <li class="menu-section">
+        <h4 class="menu-text">Student & Class</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/course"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="
+              './assets/media/svg/icons/Communication/Dial-numbers.svg'
+            "
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Course Management</span>
+        </a>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/enrollments"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="
+              './assets/media/svg/icons/Communication/Dial-numbers.svg'
+            "
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Course Enrollments</span>
+        </a>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/assignments"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Media/Movie-Lane2.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Assignment Management</span>
+        </a>
+      </li>
+      <!-- <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/video-comment"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Media/Playlist2.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Video Comment Management</span>
+        </a>
+      </li> -->
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/student"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/General/User.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Student Management</span>
+        </a>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/payments"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Dollar.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Payments</span>
+        </a>
+      </li>
+      <li class="menu-section">
+        <h4 class="menu-text">Lesson</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/lessons"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Devices/Video-camera.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Lessons</span>
+        </a>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/lessons-purchase"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Devices/Video-camera.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Lessons purchase</span>
+        </a>
+      </li>
+      <li class="menu-section">
+        <h4 class="menu-text">Other</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/open-resources"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/General/Notifications1.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Other Resources</span>
+        </a>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/notification"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/General/Notifications1.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">SMS Notifications</span>
+        </a>
+      </li>
+      <li
+      class="menu-item menu-item-submenu"
+      aria-haspopup="true"
+      data-menu-toggle="hover"
+      routerLinkActive="menu-item-open"
+    >
+      <a
+        class="menu-link menu-toggle"
+        routerLink="/inq"
+        routerLinkActive="active"
+      >
+        <span
+          [inlineSVG]="'./assets/media/svg/icons/Weather/Thunder.svg'"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text">Inquiries</span>
+      </a>
+    </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/faq"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Weather/Thunder.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">FAQ</span>
+        </a>
+      </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/reviews"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Weather/Thunder.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Student Reviews</span>
+        </a>
+      </li>
+      <li
+      class="menu-item menu-item-submenu"
+      aria-haspopup="true"
+      data-menu-toggle="hover"
+      routerLinkActive="menu-item-open"
+    >
+      <a
+        class="menu-link menu-toggle"
+        routerLink="/api-log"
+        routerLinkActive="active"
+      >
+        <span
+          [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text">API Log</span>
+      </a>
+    </li>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/setting"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Settings</span>
+        </a>
+      </li>
+
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLink="/payment-log"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Dollar.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Payment Log</span>
+        </a>
+      </li>
+      <li class="menu-section">
+        <h4 class="menu-text">Google Analytics Reports</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="analyticsreport/audience/"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-line2.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Audience</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/analyticsreport/behavior"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Dollar.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Behavior</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a
+          class="menu-link"
+          routerLink="/analyticsreport/acquisitions"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-pie.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Acquisitions</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<ng-template #menu1LevelTemplate let-item="item">
+  <ng-container *ngIf="!item.submenu">
+    <li
+      class="menu-item"
+      aria-haspopup="true"
+      routerLinkActive="menu-item-active"
+    >
+      <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
+        <span
+          [inlineSVG]="item.svg"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text" [translate]="item.translate"
+          >{{ item.title }}
+        </span>
+      </a>
+    </li>
+  </ng-container>
+
+  <ng-container *ngIf="item.submenu">
+    <li
+      class="menu-item menu-item-submenu"
+      aria-haspopup="true"
+      data-menu-toggle="hover"
+      [ngClass]="{ 'menu-item-open': isMenuItemActive(item.page) }"
+      routerLinkActive="menu-item-open"
+    >
+      <a
+        class="menu-link menu-toggle"
+        [attr.href]="item.page"
+        routerLinkActive="active"
+        [ngClass]="{ 'active ': isMenuItemActive(item.page) }"
+      >
+        <span
+          [inlineSVG]="item.svg"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text" [translate]="item.translate"
+          >{{ item.title }}
+        </span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+          <li class="menu-item menu-item-parent" aria-haspopup="true">
+            <span class="menu-link">
+              <span class="menu-text" [translate]="item.translate"
+                >{{ item.title }}
+              </span>
+            </span>
+          </li>
+          <ng-container
+            *ngFor="let sub of item.submenu"
+            [ngTemplateOutlet]="menu2LevelTemplate"
+            [ngTemplateOutletContext]="{ item: sub }"
+          ></ng-container>
+        </ul>
+      </div>
+    </li>
+  </ng-container>
+</ng-template>
+<ng-template #menu2LevelTemplate let-item="item">
+  <ng-container *ngIf="!item.submenu">
+    <li
+      class="menu-item"
+      routerLinkActive="menu-item-active"
+      aria-haspopup="true"
+      data-menu-toggle="hover"
+    >
+      <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
+        <i class="menu-bullet menu-bullet-dot">
+          <span></span>
+        </i>
+        <span class="menu-text" [translate]="item.translate"
+          >{{ item.title }}
+        </span>
+      </a>
+    </li>
+  </ng-container>
+  <ng-container *ngIf="item.submenu">
+    <li
+      class="menu-item menu-item-submenu"
+      aria-haspopup="true"
+      data-menu-toggle="hover"
+      [ngClass]="{ 'menu-item-open': isMenuItemActive(item.page) }"
+      routerLinkActive="menu-item-open"
+    >
+      <a
+        class="menu-link menu-toggle"
+        [attr.href]="item.page"
+        [ngClass]="{ 'active ': isMenuItemActive(item.page) }"
+        routerLinkActive="active"
+      >
+        <i class="menu-bullet menu-bullet-dot">
+          <span></span>
+        </i>
+        <span class="menu-text" [translate]="item.translate"
+          >{{ item.title }}
+        </span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+          <ng-container
+            *ngFor="let sub of item.submenu"
+            [ngTemplateOutlet]="menu3LevelTemplate"
+            [ngTemplateOutletContext]="{ item: sub }"
+          ></ng-container>
+        </ul>
+      </div>
+    </li>
+  </ng-container>
+</ng-template>
+<ng-template #menu3LevelTemplate let-item="item">
+  <li
+    class="menu-item"
+    aria-haspopup="true"
+    routerLinkActive="menu-item-active"
+  >
+    <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
+      <i class="menu-bullet menu-bullet-dot">
+        <span></span>
+      </i>
+      <span class="menu-text" [translate]="item.translate"
+        >{{ item.title }}
+      </span>
+    </a>
+  </li>
+</ng-template>
+<!-- end::3 Level -->
+
+<!-- begin::Separator -->
+<ng-template #menuItemSeparatorTemplate>
+  <li class="menu-separator">
+    <span></span>
+  </li>
+</ng-template>
+<!-- end::3 Separator -->
+
+<!-- begin::Section -->
+<ng-template #menuItemSectionTemplate let-item="item">
+  <li class="menu-section">
+    <h4 class="menu-text" [translate]="item.translate">{{ item.section }}</h4>
+    <i class="menu-icon flaticon-more-v2"></i>
+  </li>
+</ng-template>
+<!-- end::Section -->

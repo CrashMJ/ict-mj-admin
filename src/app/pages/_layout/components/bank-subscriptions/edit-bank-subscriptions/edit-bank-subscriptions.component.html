@@ -1,0 +1,213 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+      <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+        <li class="nav-item">
+          <a
+            (click)="setActiveTab(1)"
+            class="nav-link cursor-pointer"
+            [ngClass]="getActiveTabCSSClass(1)"
+            role="tab"
+          >
+            Payment Details
+          </a>
+        </li>
+        <!-- <li
+          class="nav-item"
+          *ngIf="
+            paymentResponse &&
+            (paymentResponse.payment_method == 'BANK' ||
+              paymentResponse.payment_method == 'SLT_BRANCH')
+          "
+        >
+          <a
+            (click)="setActiveTab(2)"
+            class="nav-link cursor-pointer"
+            [ngClass]="getActiveTabCSSClass(2)"
+            role="tab"
+          >
+            Receipt Details
+          </a>
+        </li> -->
+      </ul>
+    </div>
+  
+    <div class="card-body">
+      <div class="tab-content pt-3">
+        <!-- begin::Header -->
+        <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+          <div class="row" *ngIf="payLog">
+            <div class="col-lg-12 card mb-4">
+              <div class="col-lg-12 mt-4 row mb-4">
+                <h5 class="col-lg-12">
+                  Payment Details - {{ payLog.status }}
+                </h5>
+                <div class="col-lg-6 mt-4 row">
+                  <h6 class="col-lg-12 mt-4">Student Info</h6>
+                  <div class="col-lg-6 mt-4">
+                    ID<br />
+                    Name<br />
+                    Phone<br />
+                    Email<br />
+                    NIC<br /><br /><br /><br />
+                  </div>
+                  <div class="col-lg-6 mt-4">
+                    {{ payLog.student.id }}<br />
+                    {{ payLog.name }}<br />
+                    {{ payLog.phone }}<br />
+                    {{ payLog.student.email }}<br />
+                    {{ payLog.student.nic }}<br />
+                  </div>
+                </div>
+                <div class="col-lg-6 mt-4 row">
+                    <h6 class="col-lg-12 mt-4">Teacher Info</h6>
+                    <div class="col-lg-6 mt-4">
+                      ID<br />
+                      Name<br />
+                      <b>Subscription Payment</b> <br />
+                      Phone<br />
+                      Email<br />
+                      NIC<br /><br /><br /><br />
+                    </div>
+                    <div class="col-lg-6 mt-4">
+                      {{ payLog.teacher.id }}<br />
+                      {{ payLog.teacher.name }}<br />
+                      <b>{{ payLog.teacher.subscription_price }}</b><br />
+                      {{ payLog.teacher.phone }}<br />
+                      {{ payLog.teacher.email }}<br />
+                      {{ payLog.teacher.nic }}<br />
+                    </div>
+                  </div>
+                <div class="col-lg-6 mt-4 row">
+                  <h6 class="col-lg-12 mt-4">Payment Info</h6>
+                  <div class="col-lg-6 mt-4">
+                    Amount<br />
+                    Date<br />
+                    Bank<br />
+                    Branch<br />
+                    Created<br />
+                  </div>
+                  <div class="col-lg-6 mt-4">
+                    {{ payLog.amount }}<br />
+                    {{ payLog.payment_date }}<br />
+                    {{ payLog.bank }}<br />
+                    {{ payLog.branch }}<br />
+                    {{ payLog.created_at }}<br />
+                  </div>
+                </div>
+                <div
+                  class="col-lg-6 mt-4 row"
+                 
+                >
+                  <h6 class="col-lg-12 mt-4">Payment Slip</h6>
+                  <div class="col-lg-12 mt-4">
+                    <a
+                      href="{{ STORAGE_BUCKET }}{{
+                        payLog.uploaded_slip
+                      }}"
+                      target="_blank"
+                    >
+                      <img
+                        src="{{ STORAGE_BUCKET }}{{
+                            payLog.uploaded_slip
+                        }}"
+                        class="teacher-img"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-lg-12 card"
+              
+            >
+              <div class="col-lg-12 mt-4">
+                <h5>Update Payment Status</h5>
+                <div [formGroup]="formGroup">
+                  <div class="form-group row mt-4">
+                    <label class="col-xl-2 col-form-label"> Status</label>
+                    <div class="col-xl-4">
+                      <select
+                        class="form-control form-control-lg form-control-solid"
+                        name="media"
+                        formControlName="status"
+                        [class.is-invalid]="isControlInvalid('status')"
+                        [class.is-valid]="isControlValid('status')"
+                      >
+                        <option value="PENDING">PENDING</option>
+                        <option value="APPROVED">APPROVED</option>
+                        <option value="REJECTED">REJECTED</option>
+                      </select>
+                    </div>
+                        <label class="col-xl-2 col-form-label"> No of Months</label>
+                        <div class="col-xl-4">
+                        <input
+                            class="form-control form-control-lg form-control-solid"
+                            type="text"
+                            formControlName="number_of_months"
+                            [class.is-invalid]="isControlInvalid('number_of_months')"
+                            [class.is-valid]="isControlValid('number_of_months')"
+                        />
+                      </div>
+                    <div class="col-xl-2">
+                      <button
+                        type="submit"
+                        class="btn btn-primary btn-elevate"
+                        (click)="save()"
+                        [disabled]="formGroup.invalid || submitting"
+                      >
+                        <span *ngIf="submitting">Processing...</span
+                        ><span *ngIf="!submitting">Update</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div
+          class="tab-pane"
+          [ngClass]="getActiveTabCSSClass(2)"
+          *ngIf="
+            paymentResponse &&
+            (paymentResponse.payment_method == 'BANK' ||
+              paymentResponse.payment_method == 'SLT_BRANCH')
+          "
+        >
+          <div class="row" *ngIf="paymentResponse">
+            <div class="col-lg-12 mb-4">
+              <div class="col-lg-12 row mb-4">
+                <div class="col-lg-6 row">
+                  <div class="col-lg-6">
+                    ID<br />
+                    Reference No<br />
+                    Amount<br />
+                    Type<br />
+                    Status<br />
+                    Deposit Type<br />
+                  </div>
+                  <div class="col-lg-6">
+                    {{ paymentResponse.receipt.id }}<br />
+                    {{ paymentResponse.receipt.reference_number }}<br />
+                    {{ paymentResponse.receipt.amount }}<br />
+                    {{ paymentResponse.receipt.type }}<br />
+                    {{ paymentResponse.receipt.status }}<br />
+                    {{ paymentResponse.receipt.teleshop_bank }}<br />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  
+    <!--end::Header-->
+    <!--begin::Form-->
+  </div>
+  <!--end::Card-->
+  

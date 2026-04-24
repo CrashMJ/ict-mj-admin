@@ -1,0 +1,140 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Inquiry List</h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" (click)="addNewTip()">New Inquiry</a>
+      <a type="button" class="btn btn-primary ml-5" (click)="uploadCSV()">Upload CSV</a>
+    </div>
+  </div>
+  <div class="col-lg-12 ml-5" style="width: 100%">
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <h4 class="card-label">Filter</h4>
+      </div>
+      <div class="col-lg-12 row">
+        <div class="col-lg-2">
+          <label class="col-form-label">Name, Phone Number </label>
+          <input
+            class="form-control form-control-lg form-control-solid"
+            name="keyword"
+            #keyword
+            type="text"
+            (keyup)="search('keyword', keyword.value)"
+          />
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Inquiry Grade</label>
+          <select
+              class="form-control form-control-lg form-control-solid"
+              #class_grade
+              (change)="search('class_grade', class_grade.value)"
+          >
+                  <option value="">Select</option>
+                  <option value="miner">Miner</option>
+                  <option value="ol">O/L</option>
+                  <option value="al">A/L</option>
+              </select>
+        </div>
+        <div class="col-lg-2">
+          <label class="col-form-label">Inquiry Year </label>
+          <input
+          class="form-control form-control-lg form-control-solid"
+          #exam_year
+          type="text"
+          formControlName="msg"
+          (keyup)="search('exam_year', exam_year.value)"
+        />
+        </div>
+        <div class="col-lg-1">
+          <label class="col-form-label"></label>
+          <a
+            type="button"
+            class="btn form-control form-control-lg form-control-solid button-bottom"
+            (click)="
+            class_grade.value = '';
+              exam_year.value = '';
+              clearFilter()
+            "
+            >Clear</a
+          >
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive angular-bootstrap-table">
+      <mat-table #table2 [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.id }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="student_name">
+          <mat-header-cell *matHeaderCellDef>Student Name</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.student_name }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="student_phone">
+          <mat-header-cell *matHeaderCellDef>Phone </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.student_phone }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="class_grade">
+          <mat-header-cell *matHeaderCellDef>Grade </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.class_grade }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="exam_year">
+          <mat-header-cell *matHeaderCellDef>Exam Year </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.exam_year }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+          <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.created_at }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              [routerLink]="['/inq/edit', row.id]"
+              matTooltip="Edit"
+            >
+              <mat-icon>create</mat-icon></button
+            >&nbsp;
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="delete(row.id, row.description)"
+              matTooltip="Delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator
+        [length]="pagination_data.total"
+        [pageSizeOptions]="pagination_item_counts"
+        (page)="pageEvent($event)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

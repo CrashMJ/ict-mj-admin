@@ -1,0 +1,48 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Post Info
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div *ngIf="postResponse">
+          <h5>Type: {{ postResponse.type }}</h5>
+          <h5>Description: {{ postResponse.description }}</h5>
+          <hr />
+          <b>Images</b>
+          <div class="row">
+            <div
+              *ngFor="let img of postResponse.files"
+              class="col-lg-6 text-center card mb-4"
+            >
+              <img
+                src="{{ STORAGE_BUCKET }}{{ img.url }}"
+                class="teacher-img2"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

@@ -1,0 +1,73 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+        <!--begin::Header-->
+        <div class="card-header card-header-tabs-line">
+            <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+                <li class="nav-item">
+                    <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                        Course
+                    </a>
+                </li>
+                <li class="nav-item">
+                        <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                            Image
+                        </a>
+                </li>
+    
+            </ul>
+        </div>
+    
+    
+        <div class="card-body">
+            <div class="tab-content pt-3">
+                <!-- begin::Header -->
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                    <div [formGroup]="formGroup">
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Name </label>
+                            <div class="col-xl-4 ">
+                                <input class="form-control form-control-lg form-control-solid" type="text" formControlName="name" [class.is-invalid]="isControlInvalid('name')"
+                                    [class.is-valid]="isControlValid('name')" />
+                            </div>
+                            <label class="col-xl-2 col-form-label"> Status</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="media" formControlName="status" [class.is-invalid]="isControlInvalid('status')"
+                                [class.is-valid]="isControlValid('status')">
+                                <option value="ACTIVE">Active</option>
+                                <option value="DISABLED">Disabled</option>
+
+                            </select>
+                        </div>
+                          </div>
+                       
+                    </div>
+                    <div class="modal-footer">
+                        <ng-container>
+                            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                    <div class="col-lg-6 text-center card mb-4">
+                        <div [formGroup]="formGroup2" class="col-lg-12 text-center mt-4" *ngIf="imageResponse">
+                            <h5 class="col-xl-12 col-lg-12 col-form-label">Image</h5>
+                            <img src="{{STORAGE_BUCKET}}{{imageResponse.image}}" class="teacher-img" alt="">
+                            <div class="form-group row">
+                               
+                                <div class="col-lg-9 col-xl-9">
+                                    <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('image',$event)" accept=".png, .jpg, .jpeg"/>
+                                </div>
+                                <div class="col-lg-3 col-xl-3">
+                                    <button type="submit" class="btn btn-primary btn-elevate" (click)="updateImage()" [disabled]="formGroup2.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!--end::Header-->
+        <!--begin::Form-->
+    </div>
+    <!--end::Card-->

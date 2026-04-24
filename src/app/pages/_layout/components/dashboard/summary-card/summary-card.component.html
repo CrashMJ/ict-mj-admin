@@ -1,0 +1,29 @@
+<div class="card card-custom bg-gray-100 card-stretch gutter-b">
+    <!-- Header -->
+    <div class="card-header border-0 bg-danger py-5">
+        <h3 class="card-title font-weight-bolder text-white">{{title}}</h3>
+        <div class="card-toolbar">
+        </div>
+    </div>
+
+    <div class="card-body p-0 position-relative overflow-hidden">
+        <div class="row m-0">
+            <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7 ml-7 mt-7">
+                <app-total-amounts-text [title]="contentObject.heading1" [amount]="contentObject.amount1"></app-total-amounts-text>
+            </div>
+            <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7 mr-7 ml-7 mt-7">
+                <app-total-amounts-text [title]="contentObject.heading2" [amount]="contentObject.amount2"></app-total-amounts-text>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0 position-relative overflow-hidden">
+        <div class="row m-0">
+            <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7 ml-7">
+                <app-total-amounts-text [title]="contentObject.heading3" [amount]="contentObject.amount3"></app-total-amounts-text>
+            </div>
+            <!-- <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7 mr-7 ml-7">
+                <app-total-amounts-text [title]="heading4" [amount]="amount4"></app-total-amounts-text>
+            </div> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,205 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+    <!--begin::Header-->
+    <div class="card-header card-header-tabs-line">
+        <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+            <li class="nav-item">
+                <a (click)="setActiveTab(1)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(1)" role="tab">
+                    Coupon Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(2)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(2)" role="tab">
+                   Student Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(3)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(3)" role="tab">
+                   Purchase Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="setActiveTab(4)" class="nav-link cursor-pointer" [ngClass]="getActiveTabCSSClass(4)" role="tab">
+                   Enrollments
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card-body">
+        <div class="tab-content pt-3">
+            <!-- begin::Header -->
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+                <div class="col-lg-12 mt-4 row mb-4" *ngIf="couponResponse">
+                    <h5 class="col-lg-12">Coupon Details</h5>
+                    <div class="col-lg-6 mt-4 row">
+                        <div class="col-lg-6">
+                            <b>Code</b><br/>
+                            Usage Total<br/>
+                            Usage Left<br/>
+                            Created<br/>
+                            Updated<br/>
+                        </div>
+                        <div class="col-lg-6">
+                            <b>{{couponResponse.code}}</b><br/>
+                            {{couponResponse.usage_count}}<br/>
+                            {{couponResponse.usage_left}}<br/>
+                            {{couponResponse.created_at}}<br/>
+                            {{couponResponse.updated_at}}<br/>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h5 class="col-lg-12">Coupon Update</h5>
+                <div class="col-lg-12" [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">Type</label>
+                        <div class=" col-xl-4">
+                            <select formControlName="type" class="form-control"
+                                [class.is-invalid]="isControlInvalid('type')"
+                                [class.is-valid]="isControlValid('type')">
+                                <option value="NON_COUNTABLE">NON COUNTABLE</option>
+                                <option value="COUNTABLE">COUNTABLE</option>
+                            </select>
+                        </div>
+                        <label class="col-xl-2  col-form-label">Usage Count</label>
+                        <div class="col-xl-4">
+                            <input class="form-control form-control-lg form-control-solid" type="text" formControlName="usage_count" [class.is-invalid]="isControlInvalid('usage_count')"
+                                [class.is-valid]="isControlValid('usage_count')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                       
+                        <label class="col-xl-2 col-form-label">Status</label>
+                        <div class="col-xl-4">
+                            <select class="form-control form-control-lg form-control-solid" name="status" formControlName="status" [class.is-invalid]="isControlInvalid('status')"
+                                [class.is-valid]="isControlValid('status')">
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="DISABLED">DISABLED</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Update</span> </button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+                <div class="col-lg-12 row mb-4" *ngIf="couponResponse">
+                    <div class="col-lg-6 row">
+                        <div class="col-lg-6">
+                            ID<br/>
+                            Name<br/>
+                            Phone<br/>
+                            Email<br/>
+                            NIC<br/>
+                        </div>
+                        <div class="col-lg-6">
+                            {{couponResponse.student.id}}<br/>
+                            {{couponResponse.student.name}}<br/>
+                            {{couponResponse.student.phone}}<br/>
+                            {{couponResponse.student.email}}<br/>
+                            {{couponResponse.student.nic}}<br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+                <div class="col-lg-12 row mb-4" *ngIf="couponResponse">
+                    <div class="col-lg-6 row">
+                        <div class="col-lg-6">
+                            ID<br/>
+                            <b>Code</b><br/>
+                            <b>Status</b><br/>
+                            Amount<br/>
+                            Promo Code<br/>
+                            Date<br/>
+                            Bank<br/>
+                            Branch<br/>
+                            Created<br/>
+                            Updated<br/>
+                        </div>
+                        <div class="col-lg-6">
+                            {{couponResponse.vod_purchase.id}}<br/>
+                            <b>{{couponResponse.vod_purchase.payment_method}}</b><br/>
+                            <b>{{couponResponse.vod_purchase.status}}</b><br/>
+                            {{couponResponse.vod_purchase.amount}}<br/>
+                            {{couponResponse.vod_purchase.promocode_used}}<br/>
+                            {{couponResponse.vod_purchase.payment_date}}<br/>
+                            {{couponResponse.vod_purchase.bank}}<br/>
+                            {{couponResponse.vod_purchase.branch}}<br/>
+                            {{couponResponse.vod_purchase.created_at}}<br/>
+                            {{couponResponse.vod_purchase.updated_at}}<br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+                <mat-table #table2 [dataSource]="dataSource" *ngIf="couponResponse">
+				
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.id }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef>Type </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.type }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.status }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="created_at">
+                        <mat-header-cell *matHeaderCellDef>Enrolled Date </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.created_at }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="video_id">
+                        <mat-header-cell *matHeaderCellDef>Video ID </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.video.id }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="video_code">
+                        <mat-header-cell *matHeaderCellDef>Video Code </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.video.video_code }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef>Video Title</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.video.title }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef>Video Price</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            {{ row.video.price }}
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></mat-row>
+                </mat-table>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Header-->
+    <!--begin::Form-->
+</div>
+<!--end::Card-->

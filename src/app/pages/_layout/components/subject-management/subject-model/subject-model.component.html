@@ -1,0 +1,238 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <h3>ADD NEW COURSE</h3>
+      <ng-container>
+        <!-- <ng-container >Edit</ng-container>
+                      <ng-container >Create</ng-container>
+                      customer -->
+        <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Title Sn</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="name_sn"
+                [class.is-invalid]="isControlInvalid('name_sn')"
+                [class.is-valid]="isControlValid('name_sn')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Title En</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="name_en"
+                [class.is-invalid]="isControlInvalid('name_en')"
+                [class.is-valid]="isControlValid('name_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Class Year</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="class_year"
+                [class.is-invalid]="isControlInvalid('class_year')"
+                [class.is-valid]="isControlValid('class_year')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Class Date</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="class_date_en"
+                [class.is-invalid]="isControlInvalid('class_date_en')"
+                [class.is-valid]="isControlValid('class_date_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Class Fee</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="course_fee"
+                [class.is-invalid]="isControlInvalid('course_fee')"
+                [class.is-valid]="isControlValid('course_fee')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Class Time</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="class_time"
+                [class.is-invalid]="isControlInvalid('class_time')"
+                [class.is-valid]="isControlValid('class_time')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Course Code</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="course_code"
+                [class.is-invalid]="isControlInvalid('course_code')"
+                [class.is-valid]="isControlValid('course_code')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Description 1 En</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_1_en"
+                [class.is-invalid]="isControlInvalid('description_1_en')"
+                [class.is-valid]="isControlValid('description_1_en')"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Description 2 En</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_2_en"
+                [class.is-invalid]="isControlInvalid('description_2_en')"
+                [class.is-valid]="isControlValid('description_2_en')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Free Class URL</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_1_sn"
+                [class.is-invalid]="isControlInvalid('description_1_sn')"
+                [class.is-valid]="isControlValid('description_1_sn')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"
+              >Free Class URL Description</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description_2_sn"
+                [class.is-invalid]="isControlInvalid('description_2_sn')"
+                [class.is-valid]="isControlValid('description_2_sn')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Stream</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_grade"
+                formControlName="class_grade"
+                [class.is-invalid]="isControlInvalid('class_grade')"
+                [class.is-valid]="isControlValid('class_grade')"
+              >
+                <option value="al">A/L</option>
+                <option value="ol">O/L</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Language</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="language"
+                formControlName="language"
+                [class.is-invalid]="isControlInvalid('language')"
+                [class.is-valid]="isControlValid('language')"
+              >
+                <option value="Sinhala">Sinhala</option>
+                <option value="English">English</option>
+                <!-- <option value="TAMIL">Tamil</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">
+              Delivery Type</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_delivery_type"
+                formControlName="class_delivery_type"
+                [class.is-invalid]="isControlInvalid('class_delivery_type')"
+                [class.is-valid]="isControlValid('class_delivery_type')"
+              >
+                <option value="online">Online</option>
+                <option value="physical">Physical</option>
+                <!-- <option value="TAMIL">Tamil</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Image</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                (change)="uploadFile('image', $event)"
+                formControlName="image"
+                [class.is-invalid]="isControlInvalid('image')"
+                [class.is-valid]="isControlValid('image')"
+              />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container>
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

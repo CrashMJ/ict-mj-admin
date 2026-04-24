@@ -1,0 +1,138 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <h3>ADD NEW RESOURCE</h3>
+      <ng-container>
+        <!-- <ng-container >Edit</ng-container>
+                      <ng-container >Create</ng-container>
+                      customer -->
+        <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Class Type</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_type"
+                formControlName="class_type"
+                [class.is-invalid]="isControlInvalid('class_type')"
+                [class.is-valid]="isControlValid('class_type')"
+              >
+                <option value="al">A/L</option>
+                <option value="ol">O/L</option>
+                <option value="miner">Miner</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Class Grade</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="grade"
+                formControlName="grade"
+                [class.is-invalid]="isControlInvalid('grade')"
+                [class.is-valid]="isControlValid('grade')"
+              >
+                <option value="grade6">Grade 6</option>
+                <option value="grade7">Grade 7</option>
+                <option value="grade8">Grade 8</option>
+                <option value="grade9">Grade 9</option>
+                <option value="grade10">Grade 10</option>
+                <option value="grade11">Grade 11</option>
+                <option value="grade12">Grade 12</option>
+                <option value="grade13">Grade 13</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Medium</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="medium"
+                formControlName="medium"
+                [class.is-invalid]="isControlInvalid('medium')"
+                [class.is-valid]="isControlValid('medium')"
+              >
+                <option value="sinhala">Sinhala</option>
+                <option value="tamil">Tamil</option>
+                <option value="english">English</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Type</label>
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="type"
+                formControlName="type"
+                [class.is-invalid]="isControlInvalid('type')"
+                [class.is-valid]="isControlValid('type')"
+              >
+                <option value="modal_papers">Modal Paper</option>
+                <option value="past_papers">Past Paper</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">URL</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="url"
+                [class.is-invalid]="isControlInvalid('url')"
+                [class.is-valid]="isControlValid('url')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Title</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="title"
+                [class.is-invalid]="isControlInvalid('title')"
+                [class.is-valid]="isControlValid('title')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Description</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="description"
+                [class.is-invalid]="isControlInvalid('description')"
+                [class.is-valid]="isControlValid('description')"
+              />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container>
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

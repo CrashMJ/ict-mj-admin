@@ -1,0 +1,151 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <h3>ADD NEW LESSON PAYMENT</h3>
+      <ng-container>
+        <!-- <ng-container >Edit</ng-container>
+                      <ng-container >Create</ng-container>
+                      customer -->
+        <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">
+              Payment Type</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="payment_type"
+                formControlName="payment_type"
+                [class.is-invalid]="isControlInvalid('payment_type')"
+                [class.is-valid]="isControlValid('payment_type')"
+              >
+                <option value="bank">Bank</option>
+                <option value="payhere">Payhere</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Amount</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="price"
+                [class.is-invalid]="isControlInvalid('price')"
+                [class.is-valid]="isControlValid('price')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Bank Name</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="bank_name"
+                [class.is-invalid]="isControlInvalid('bank_name')"
+                [class.is-valid]="isControlValid('bank_name')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Branch Name</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="branch_name"
+                [class.is-invalid]="isControlInvalid('branch_name')"
+                [class.is-valid]="isControlValid('branch_name')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label"> Slip</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                (change)="uploadFile('slip', $event)"
+                formControlName="slip"
+                [class.is-invalid]="isControlInvalid('slip')"
+                [class.is-valid]="isControlValid('slip')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Student ID</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="student_id"
+                placeholder="Please enter valid student id"
+                [class.is-invalid]="isControlInvalid('student_id')"
+                [class.is-valid]="isControlValid('student_id')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">
+              Select Lesson</label
+            >
+            <div class="col-lg-11 col-xl-9">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="video_id"
+                formControlName="video_id"
+                [class.is-invalid]="isControlInvalid('video_id')"
+                [class.is-valid]="isControlValid('video_id')"
+              >
+              <ng-container *ngIf="lessonObj?.length > 0">
+                <option
+                  *ngFor="let lesson of lessonObj"
+                  value="{{ lesson.id }}"
+                >
+                  {{ lesson.name }} {{ lesson.days }}Days - Rs. {{ lesson.price }}
+                </option>
+              </ng-container>
+                
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-lg-3 col-form-label">Days</label>
+            <div class="col-lg-11 col-xl-9">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="days"
+                placeholder="Please enter valid days"
+                [class.is-invalid]="isControlInvalid('days')"
+                [class.is-valid]="isControlValid('days')"
+              />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container>
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

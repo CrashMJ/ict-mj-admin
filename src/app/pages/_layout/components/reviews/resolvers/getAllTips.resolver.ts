@@ -1,0 +1,22 @@
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Resolve,
+} from "@angular/router";
+import { Injectable } from "@angular/core";
+import { TipInfoService } from "../services/reviews.service";
+
+@Injectable()
+export class GetAllReviewResolver implements Resolve<any> {
+  constructor(private tipInfoService: TipInfoService) {}
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    let obj = {
+      filter: [],
+      limit: 10,
+      skip: 0,
+      sort: "DESC",
+    };
+    // return this.tipInfoService.getAllTips();
+  }
+}

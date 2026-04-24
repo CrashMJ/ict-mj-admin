@@ -1,0 +1,95 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Admin List</h3>
+        </div>
+        <div class="card-toolbar">
+            <a type="button" class="btn btn-primary" (click)="addNewAdmin()">New Admin</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <mat-table #table2 [dataSource]="dataSource">
+				
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.id }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.name }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef>Email </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.email }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="role">
+                    <mat-header-cell *matHeaderCellDef>Acc. Type </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.role }}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.created_at }}
+                    </mat-cell>
+                </ng-container>
+                <!-- <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <mat-chip-list aria-label="">
+                            <mat-chip color="accent" *ngIf="row.status == 'ACTIVE'" selected>Active</mat-chip>
+                            <mat-chip color="warn" *ngIf="row.status == 'DISABLED'" selected>DISABLED</mat-chip>
+                        </mat-chip-list>
+                    </mat-cell>
+                   
+                </ng-container> -->
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button
+                            *ngIf="accType === 'SUPER_ADMIN'"
+                            mat-icon-button
+                            color="primary"
+                            type="button"
+                            [routerLink]="['/admin/edit', row.id]"
+                            matTooltip="Edit"
+                        >
+                            <mat-icon>create</mat-icon></button
+                        >&nbsp;
+                        <button
+                            mat-icon-button
+                            color="warn"
+                            type="button"
+                            (click)="delete(row.id,row.description)"
+                            matTooltip="Delete"
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-cell>
+                   
+                </ng-container>
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns"
+                ></mat-header-row>
+                <mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                ></mat-row>
+            </mat-table>
+            <mat-paginator
+            [length]="pagination_data.total"
+            [pageSizeOptions]="pagination_item_counts"
+            (page)="pageEvent($event)"
+            showFirstLastButtons
+        ></mat-paginator>
+        </div>
+       
+    </div>
+</div>

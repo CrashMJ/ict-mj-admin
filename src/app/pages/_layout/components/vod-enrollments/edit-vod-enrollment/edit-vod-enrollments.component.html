@@ -1,0 +1,89 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Enrollment Details
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div class="row" *ngIf="vodEnrollResponse">
+          <!-- <div class="row justify-content-end align-content-end">
+            <div class="col text-right">
+            <ng-container>
+              <button
+                type="submit"
+                class="btn btn-danger btn-elevate"
+                (click)="reset()"
+                [disabled]="submitting"
+              >
+                Reset View Count
+              </button>
+            </ng-container>
+            </div>
+          </div> -->
+          <div class="col-xl-12">
+            <ngx-json-viewer
+              [json]="vodEnrollResponse"
+              [expanded]="false"
+            ></ngx-json-viewer>
+          </div>
+          <div class="col-xl-12">
+            <div class="modal-footer">
+              <div class="col-xl-12">
+                <div [formGroup]="formGroup" *ngIf="vodEnrollResponse">
+                  <div class="form-group row mt-5">
+                    <label class="col-xl-2 col-form-label">
+                      Enrollment Status</label
+                    >
+                    <div class="col-xl-4">
+                      <select
+                        class="form-control form-control-lg form-control-solid"
+                        name="status"
+                        formControlName="status"
+                        [class.is-invalid]="isControlInvalid('status')"
+                        [class.is-valid]="isControlValid('status')"
+                      >
+                        <option value="active">Active</option>
+                        <option value="blocked">Blocked</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-12">
+                <ng-container>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-elevate"
+                    (click)="save()"
+                    [disabled]="submitting"
+                  >
+                    Save
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->

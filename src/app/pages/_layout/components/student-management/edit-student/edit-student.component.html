@@ -1,0 +1,513 @@
+<!--begin::Card-->
+<div class="card card-custom gutter-b">
+  <!--begin::Header-->
+  <div class="card-header card-header-tabs-line">
+    <ul class="nav nav-dark nav-bold nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(1)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(1)"
+          role="tab"
+        >
+          Profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(2)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(2)"
+          role="tab"
+        >
+          Profile Picture
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(3)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(3)"
+          role="tab"
+        >
+          NIC Picture
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(4)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(4)"
+          role="tab"
+        >
+          Enrollments
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(5)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(5)"
+          role="tab"
+        >
+          Reset Password
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a
+          (click)="setActiveTab(6)"
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveTabCSSClass(6)"
+          role="tab"
+        >
+          Logged Devices
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content pt-3">
+      <!-- begin::Header -->
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(1)">
+        <div [formGroup]="formGroup">
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">First Name</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="fname"
+                [class.is-invalid]="isControlInvalid('fname')"
+                [class.is-valid]="isControlValid('fname')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Last Name</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="lname"
+                [class.is-invalid]="isControlInvalid('lname')"
+                [class.is-valid]="isControlValid('lname')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">NIC</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="nic"
+                [class.is-invalid]="isControlInvalid('nic')"
+                [class.is-valid]="isControlValid('nic')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">Phone Number</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="phone"
+                [class.is-invalid]="isControlInvalid('phone')"
+                [class.is-valid]="isControlValid('phone')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Email</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="email"
+                [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')"
+              />
+            </div>
+            <label class="col-xl-2 col-form-label">District</label>
+            <div class="col-xl-4">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="district"
+                [class.is-invalid]="isControlInvalid('district')"
+                [class.is-valid]="isControlValid('district')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Address </label>
+            <div class="col-xl-10">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="text"
+                formControlName="address"
+                [class.is-invalid]="isControlInvalid('address')"
+                [class.is-valid]="isControlValid('address')"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">Class Grade</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_grade"
+                formControlName="class_grade"
+                [class.is-invalid]="isControlInvalid('class_grade')"
+                [class.is-valid]="isControlValid('class_grade')"
+              >
+                <option value="al">Advanced Level</option>
+                <option value="ol">Odinary Level</option>
+                <option value="miner">Miner</option>
+              </select>
+            </div>
+            <label class="col-xl-2 col-form-label">Class Type</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="class_type"
+                formControlName="class_type"
+                [class.is-invalid]="isControlInvalid('class_type')"
+                [class.is-valid]="isControlValid('class_type')"
+              >
+                <option value="">Select Class Type</option>
+                <option value="online">Online</option>
+                <option value="physical">Physical</option>
+              </select>
+            </div>
+          </div>
+          <!-- Location dropdown, shown only if 'class_type' is 'physical' -->
+          <div class="form-group row" *ngIf="formGroup.get('class_type').value === 'physical'">
+            <label class="col-xl-2 col-form-label">Location</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="location"
+                formControlName="location"
+                [class.is-invalid]="isControlInvalid('location')"
+                [class.is-valid]="isControlValid('location')"
+              >
+                <option value="">Select Location</option>
+                <option value='aone_montana'>Aone Negambo</option>
+                <option value='montana_gampaha'>Montana Gampaha</option>
+                <option value='sisip_chilaw'>Sisip Chilaw</option>
+                <option value='siyathra_kiribathgoda'>Siyathra Kiribathgoda</option>
+              </select>
+            </div>
+            <label class="col-xl-2 col-form-label"> Is Phone Verified</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="is_phone_verified"
+                formControlName="is_phone_verified"
+                [class.is-invalid]="isControlInvalid('is_phone_verified')"
+                [class.is-valid]="isControlValid('is_phone_verified')"
+              >
+                <option value="true">YES</option>
+                <option value="false">NO</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label"> Status</label>
+            <div class="col-xl-4">
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="status"
+                formControlName="status"
+                [class.is-invalid]="isControlInvalid('status')"
+                [class.is-valid]="isControlValid('status')"
+              >
+                <option value="active">ACTIVE</option>
+                <option value="blocked">BLOCKED</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-xl-11"></div>
+            <div class="col-xl-1">
+              <button
+                type="submit"
+                [disabled]="formGroup.invalid"
+                class="btn btn-primary btn-elevate"
+                (click)="save()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(2)">
+        <div class="col-lg-6 text-center card mb-4">
+          <div
+            [formGroup]="formGroup3"
+            class="col-lg-12 text-center mt-4"
+          >
+            <h5 class="col-xl-12 col-lg-12 col-form-label">Profile Picture</h5>
+            <img
+              [src]="studentResponse?.image ? STORAGE_BUCKET + studentResponse.image : 'assets/media/avatars/default.jpg'"
+              class="teacher-img"
+              alt=""
+            />
+            <div class="form-group row">
+              <div class="col-lg-9 col-xl-9">
+                <input
+                  class="form-control form-control-lg form-control-solid"
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  (change)="uploadFile('image', $event)"
+                />
+              </div>
+              <div class="col-lg-3 col-xl-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-elevate"
+                  (click)="updateProfileBanner()"
+                  [disabled]="formGroup3.invalid"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(3)">
+        <div [formGroup]="formGroupNic">
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">NIC Front</label>
+
+            <div class="col-xl-4">
+                <img
+                  (click)="openZoom(STORAGE_BUCKET + studentResponse.nic_front)"
+                  [src]="studentResponse?.nic_front ? STORAGE_BUCKET + studentResponse.nic_front : 'assets/media/bg/empty.png'"
+                  style="width:300px; border-radius:6px; border:1px solid #ddd; cursor:pointer;"
+                />
+            </div>
+
+            <label class="col-xl-2 col-form-label">NIC Back</label>
+
+            <div class="col-xl-4">
+                <img
+                  (click)="openZoom(STORAGE_BUCKET + studentResponse.nic_back)"
+                  [src]="studentResponse?.nic_back ? STORAGE_BUCKET + studentResponse.nic_back : 'assets/media/bg/empty.png'"
+                  style="width:300px; border-radius:6px; border:1px solid #ddd; cursor:pointer;"
+                />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(4)">
+        <div class="mat-elevation-z8">
+          <!-- <mat-table #table2 [dataSource]="dataSource2">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_id">
+              <mat-header-cell *matHeaderCellDef>Video ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_price">
+              <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video_price }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="video_code">
+              <mat-header-cell *matHeaderCellDef>video_code </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.video.video_code }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="student_id">
+              <mat-header-cell *matHeaderCellDef>Student ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.name }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.email }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+              <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.student.phone }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef>Status </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-chip-list aria-label="">
+                  <mat-chip color="" *ngIf="row.status == 'PENDING'" selected
+                    >PENDING</mat-chip
+                  >
+                  <mat-chip
+                    color="accent"
+                    *ngIf="row.status == 'APPROVED'"
+                    selected
+                    >APPROVED</mat-chip
+                  >
+                  <mat-chip
+                    color="warn"
+                    *ngIf="row.status == 'REJECTED'"
+                    selected
+                    >REJECTED</mat-chip
+                  >
+                </mat-chip-list>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef>Created </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.created_at }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  [routerLink]="['/vod-enrollments/edit', row.id]"
+                  matTooltip="Edit"
+                >
+                  <mat-icon>create</mat-icon></button
+                >&nbsp;
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns2"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data2.total"
+            [pageSizeOptions]="pagination_item_counts2"
+            (page)="pageEvent2($event)"
+            showFirstLastButtons
+          ></mat-paginator> -->
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(5)">
+        <div [formGroup]="formGroup2" class="col-lg-12 card pt-3">
+          <div class="form-group row">
+            <label class="col-xl-2 col-form-label">New Password</label>
+            <div class="col-lg-3">
+              <input
+                class="form-control form-control-lg form-control-solid"
+                type="newPassword"
+                formControlName="newPassword"
+              />
+            </div>
+            <div class="col-lg-2">
+              <button
+                type="submit"
+                class="btn btn-primary btn-elevate"
+                (click)="updatePassword()"
+                [disabled]="formGroup2.invalid"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [ngClass]="getActiveTabCSSClass(6)">
+        <div class="mat-elevation-z8">
+          <mat-table #table4 [dataSource]="dataSource4">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.id }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="deviceUUId">
+              <mat-header-cell *matHeaderCellDef>Device UUID </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.deviceUUId }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="deviceId">
+              <mat-header-cell *matHeaderCellDef>Device Id </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.deviceId }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="browser">
+              <mat-header-cell *matHeaderCellDef>Browser </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.browser }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="os">
+              <mat-header-cell *matHeaderCellDef>OS </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.os }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="deviceType">
+              <mat-header-cell *matHeaderCellDef>Device Type </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.deviceType }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="deviceStatus">
+              <mat-header-cell *matHeaderCellDef>Device Status </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.deviceStatus }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+              <mat-header-cell *matHeaderCellDef>created at </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.createdAt }}
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns4"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns4"></mat-row>
+          </mat-table>
+          <mat-paginator
+            [length]="pagination_data4.total"
+            [pageSizeOptions]="pagination_item_counts4"
+            (page)="pageEvent4($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end::Header-->
+  <!--begin::Form-->
+</div>
+<!--end::Card-->
+
+<!-- Zoom modal: outside the card -->
+<div class="zoom-modal" *ngIf="isZoomModalOpen" (click)="closeZoom()">
+  <img [src]="zoomImage" class="zoomed-img" />
+</div>
+
+

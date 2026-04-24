@@ -1,0 +1,95 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <h3>ADD NEW RECEIPT</h3>
+            <ng-container>
+                <!-- <ng-container >Edit</ng-container>
+                  <ng-container >Create</ng-container>
+                  customer -->
+                <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+                <div [formGroup]="formGroup">
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Student Name</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="student_name" [class.is-invalid]="isControlInvalid('student_name')"
+                                [class.is-valid]="isControlValid('student_name')" />
+                        </div>
+                    </div>
+
+                                   <div class="form-group row">
+                        <label class="col-xl-3  col-form-label">Phone</label>
+                        <div class="col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="phone" [class.is-invalid]="isControlInvalid('phone')"
+                                [class.is-valid]="isControlValid('phone')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3  col-form-label">Password</label>
+                        <div class="col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="password"
+                                formControlName="password" [class.is-invalid]="isControlInvalid('password')"
+                                [class.is-valid]="isControlValid('password')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3  col-form-label">Password</label>
+                        <div class="col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="password"
+                                formControlName="confirm_password"
+                                [class.is-invalid]="isControlInvalid('confirm_password')"
+                                [class.is-valid]="isControlValid('confirm_password')" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Address </label>
+                        <div class="col-lg-11 col-xl-9 ">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="address" [class.is-invalid]="isControlInvalid('address')"
+                                [class.is-valid]="isControlValid('address')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Tele Shop Bank</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="teleshop_bank" [class.is-invalid]="isControlInvalid('teleshop_bank')"
+                                [class.is-valid]="isControlValid('teleshop_bank')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Amount</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                formControlName="amount" [class.is-invalid]="isControlInvalid('amount')"
+                                [class.is-valid]="isControlValid('amount')" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Type</label>
+                        <div class="col-lg-11 col-xl-9">
+                            <select formControlName="type" class="form-control"
+                                [class.is-invalid]="isControlInvalid('type')"
+                                [class.is-valid]="isControlValid('type')">
+                                <option disabled>Type</option>
+                                <option value="VOD">VOD</option>
+                                <option value="kandy">Kandy</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container>
+
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+                [disabled]="formGroup.invalid">Save</button>
+        </ng-container>
+    </div>
+</div>

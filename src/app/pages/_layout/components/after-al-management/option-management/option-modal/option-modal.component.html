@@ -1,0 +1,61 @@
+<div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title h4" id="example-modal-sizes-title-lg">
+                <h3>ADD NEW OPTION</h3>
+                <ng-container>
+                    <!-- <ng-container >Edit</ng-container>
+                              <ng-container >Create</ng-container>
+                              customer -->
+                    <!-- <ng-container *ngIf="customer.id">'{{customer.firstName}} {{ customer.lastName }}'</ng-container> -->
+                    <div [formGroup]="formGroup">
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Video Link</label>
+                            <div class="col-lg-4">
+                                <input class="form-control form-control-lg form-control-solid" type="text" formControlName="video_link" [class.is-invalid]="isControlInvalid('video_link')"
+                                    [class.is-valid]="isControlValid('video_link')" />
+                            </div>
+                            <label class="col-xl-2 col-form-label"> Institute</label>
+                            <div class="col-xl-4">
+                                <select class="form-control form-control-lg form-control-solid" name="after_al_category_id" formControlName="after_al_category_id" [class.is-invalid]="isControlInvalid('after_al_category_id')"
+                                    [class.is-valid]="isControlValid('after_al_category_id')">
+                                    <option *ngFor="let item of categoryObj" [value]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Course</label>
+                            <div class="col-xl-4">
+                                <select class="form-control form-control-lg form-control-solid" name="institute_id" formControlName="institute_id" [class.is-invalid]="isControlInvalid('institute_id')"
+                                    [class.is-valid]="isControlValid('institute_id')">
+                                    <option *ngFor="let item of instituteObj" [value]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">Banner</label>
+                            <div class="col-lg-4">
+                                <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('banner',$event)" accept=".png, .jpg, .jpeg"/>
+                            </div>
+                            <label class="col-xl-2 col-form-label">Thumbnail</label>
+                            <div class="col-lg-4">
+                                <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('thumbnail',$event)" accept=".png, .jpg, .jpeg"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-form-label">PDF Document</label>
+                            <div class="col-lg-4">
+                                <input class="form-control form-control-lg form-control-solid" type="file" (change)="uploadFile('pdf',$event)" accept=".pdf"/>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+            <ng-container>
+                <!-- [disabled]="formGroup.invalid" -->
+                <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid || submitting"><span *ngIf="submitting">Processing...</span><span *ngIf="!submitting">Save</span> </button>
+            </ng-container>
+        </div>
+    </div>
